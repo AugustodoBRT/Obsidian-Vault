@@ -16,3 +16,4 @@ O objetivo deste repositório é garantir **segurança**, **sincronização** e 
 
 O repositório é atualizado manualmente ou via script para manter as notas seguras e sincronizadas entre dispositivos.
 
+alo
