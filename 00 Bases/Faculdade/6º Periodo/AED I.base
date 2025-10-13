@@ -1,0 +1,15 @@
+views:
+  - type: table
+    name: Tabela
+    filters:
+      and:
+        - materia == link("AED I")
+    order:
+      - file.name
+      - file.ctime
+      - tipo
+    sort:
+      - property: file.ctime
+        direction: ASC
+    columnSize:
+      file.ctime: 211

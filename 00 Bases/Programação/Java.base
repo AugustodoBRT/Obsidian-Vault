@@ -1,0 +1,22 @@
+formulas:
+  Sem título: ""
+views:
+  - type: table
+    name: Tabela
+    filters:
+      and:
+        - file.tags.contains("java")
+    order:
+      - file.name
+      - materia
+      - relacionados
+      - file.tags
+    sort:
+      - property: file.ctime
+        direction: ASC
+    imageFit: ""
+    image: note.cssclasses
+    columnSize:
+      file.name: 676
+      note.Data: 161
+      note.tags: 328

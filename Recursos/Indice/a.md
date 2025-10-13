@@ -1,0 +1,1 @@
+é usado para linkar alguma coisa utilizando html

@@ -1,0 +1,15 @@
+formulas:
+  cover: image(cover)
+views:
+  - type: cards
+    name: Livros
+    filters:
+      and:
+        - file.inFolder("MyVault/Recursos/Biblioteca/Livros")
+    order:
+      - file.name
+      - autor
+      - Status
+      - Termino
+    image: note.Cover
+    rowHeight: extra
