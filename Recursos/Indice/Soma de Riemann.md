@@ -1,14 +1,16 @@
 ---
-materia:
+materia: "[[Integração e Séries]]"
 relacionados:
 tipo: conteudo
 tags:
   - estudo
   - faculdade
+  - calculo
 cssclasses:
   - daily
+  - segunda-feira
 ---
-#  {{title}}
+#  Soma de Riemann
 
 #### **Resumo:**
 
