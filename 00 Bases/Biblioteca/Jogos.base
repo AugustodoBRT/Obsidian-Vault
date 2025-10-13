@@ -1,0 +1,17 @@
+formulas:
+  cover: image(cover)
+views:
+  - type: cards
+    name: Jogos
+    filters:
+      and:
+        - file.inFolder("MyVault/Recursos/Biblioteca/Jogos")
+    order:
+      - file.name
+      - Gênero
+      - Horas Jogadas
+      - Minha nota
+    imageFit: ""
+    cardSize: 200
+    image: note.background_image
+    imageAspectRatio: 0.95
