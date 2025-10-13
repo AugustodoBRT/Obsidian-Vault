@@ -8,9 +8,10 @@ tags:
 cssclasses:
   - daily
   - segunda-feira
+materia: "[[Integração e Séries]]"
 ---
 ---
-# 📚 Integração e Séries
+# Integração e Séries
 ---
 
 
