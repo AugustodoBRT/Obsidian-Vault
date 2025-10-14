@@ -9,30 +9,10 @@
 >> 
 
 ---
-
-```gEvent
-type: week
-exclude: []
-include:
-  - augustodobrt8@gmail.com
-  - Trabalho
-  - Academia
-  - Tarefas
-  - Estudo
-  - Lazer
-  - Prova
-  - Faculdade
-
-hourRange:
-  - 0
-  - 24
-offset: 0
-timespan: 7
-showAllDay: true
-navigation: true
+<iframe src="https://calendar.google.com/calendar/u/0/r"
+        style="width:100%; height:700px; border:0;"></iframe>
 
 
-```
 ---
 ```dataviewjs
 // Calculate days since first note
@@ -89,11 +69,29 @@ dv.paragraph(`<div style="
 > 
 ---
 
-![[Calendário.url]]
+
+```gEvent
+type: week
+exclude: []
+include:
+  - augustodobrt8@gmail.com
+  - Trabalho
+  - Academia
+  - Tarefas
+  - Estudo
+  - Lazer
+  - Prova
+  - Faculdade
+
+hourRange:
+  - 0
+  - 24
+offset: 0
+timespan: 7
+showAllDay: true
+navigation: true
 
 
-<!-- cole isto numa nota (vai aparecer no modo leitura) -->
-<iframe src="https://example.com"
-        style="width:100%; height:700px; border:0;"></iframe>
+```
 
-https://youtube.com
+https://calendar.google.com/calendar/u/0/r
