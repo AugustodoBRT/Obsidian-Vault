@@ -51,3 +51,4 @@ II - $\large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$
 
 
 
+![[Tabela Integrais Imediatas.png]]
