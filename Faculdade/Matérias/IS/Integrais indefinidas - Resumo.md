@@ -6,6 +6,7 @@ relacionados: []
 tags:
   - estudo
   - faculdade
+  - calculo
 cssclasses:
   - daily
   - segunda-feira
