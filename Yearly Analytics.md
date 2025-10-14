@@ -1,41 +1,48 @@
-# Yearly Analytics
+# 📊 Yearly Analytics
 
-## Summary cards
-**Total Focus:**  
+## 🔹 Summary Cards
 ```dataviewjs
-// simples: soma de minutos nas notas do ano (exemplo)
+// Soma total de minutos e dias registrados
 const pages = dv.pages('"Daily"').where(p => p["focus-entries"]);
 let totalMin = 0;
 for (let p of pages) {
-  for (let e of p["focus-entries"]) totalMin += e.minutes;
+  for (let e of p["focus-entries"]) totalMin += e.minutes ?? 0;
 }
-dv.paragraph(`Total: **${(totalMin/60).toFixed(1)}h** in ${pages.length} days`);
+dv.paragraph(`**Total Focus:** ${(totalMin/60).toFixed(1)}h in ${pages.length} days`);
 ```
 
+---
 
-## Breakdown por categoria (gráfico tipo pizza — Tracker)
+## 🧩 Breakdown por categoria (Tracker - gráfico tipo pizza)
 ```tracker
 searchType: tag
 searchTarget: "#focus"
 dataset:
   - tag: "#focus/coding"
     label: "Coding"
+    id: coding
   - tag: "#focus/algorithms"
     label: "Algorithms"
+    id: algorithms
   - tag: "#focus/physics"
     label: "Physics"
+    id: physics
   - tag: "#focus/business"
     label: "Business"
+    id: business
+  - tag: "#focus/misc"
+    label: "Misc"
+    id: misc
 chart:
   type: pie
-  title: "Focus Breakdown (h)"
+  title: "Focus Breakdown (hours)"
   valueType: minutes
   convertToHours: true
   width: 520
-  height: 320
+  height: 300
 ```
-# Exemplo de bloco suportado pelo Heatmap Tracker (configurar através do plugin UI)
 
+```heatmap-tracker
 
 dataset:
   folder: "Daily"
@@ -46,32 +53,32 @@ dataset:
 display:
   type: year-heatmap
   year: 2025
-
-```dataview
-table date as "Dia", length(rows(focus-entries)) as "Sessões", sum(rows(focus-entries).map(x => x.minutes))/60 as "Horas"
-from "Daily"
-where focus-entries
-group by date
-sort date desc
-limit 30
 ```
 
-
 ```dataview
-// Estatísticas: melhor dia, média de sessão, total por tag
+TABLE date AS "Dia",
+length(focus-entries) AS "Sessões",
+(round(sum(focus-entries.minutes) / 60, 1)) AS "Horas"
+FROM "Daily"
+WHERE focus-entries
+SORT date DESC
+LIMIT 30
+
+```
+```dataviewjs
 const pages = dv.pages('"Daily"').where(p => p["focus-entries"]);
 let totalMin = 0, sessions = 0;
 let byTag = {};
 for (let p of pages) {
   for (let e of p["focus-entries"]) {
-    totalMin += e.minutes; sessions++;
-    let tag = e.tag || "untagged";
-    byTag[tag] = (byTag[tag] || 0) + e.minutes;
+    totalMin += e.minutes ?? 0;
+    sessions++;
+    let tag = e.tag ?? "untagged";
+    byTag[tag] = (byTag[tag] || 0) + (e.minutes ?? 0);
   }
 }
-let avgSession = sessions ? (totalMin/sessions).toFixed(1) : 0;
-dv.paragraph(`**Total:** ${(totalMin/60).toFixed(1)}h • **Sessões:** ${sessions} • **Média sessão:** ${avgSession} min`);
-dv.table(["Tag","Horas"], Object.entries(byTag).map(([t,m])=>[t,(m/60).toFixed(1)]));
+let avg = sessions ? (totalMin / sessions).toFixed(1) : 0;
+dv.paragraph(`**Total:** ${(totalMin/60).toFixed(1)}h • **Sessões:** ${sessions} • **Média:** ${avg} min`);
+dv.table(["Tag", "Horas"], Object.entries(byTag).map(([t, m]) => [t, (m/60).toFixed(1)]));
 
 ```
-
