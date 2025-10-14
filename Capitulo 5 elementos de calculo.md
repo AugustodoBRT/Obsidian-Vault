@@ -7,3 +7,6 @@
 6. Frações parciais
 7. Trigonométricas e substituições trigonométricas
 
+- [ ] [[Soma de Riemann]]
+- [ ] [[TFC]]
+- [ ] [[Integraais indefinidas]]
