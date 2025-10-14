@@ -1,5 +1,5 @@
 views:
-  - type: table
+  - type: cards
     name: Tabela
     filters:
       and:
@@ -13,4 +13,7 @@ views:
         direction: ASC
     rowHeight: medium
     columnSize:
+      file.name: 277
       file.ctime: 224
+  - type: table
+    name: Visualizaçao padrão
