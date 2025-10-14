@@ -9,4 +9,4 @@
 
 - [ ] [[Soma de Riemann]]
 - [ ] [[TFC]]
-- [ ] [[Integrais indefinidas]]
+- [ ] [[Integrais indefinidas - Resumo]]
