@@ -36,8 +36,8 @@ materia: "[[Integração e Séries]]"
 - Palavras-chave: antiderivada, constante de integração, substituição
 ##### Subconteudos:
 
->  [[Integrais indefinidas - Resumo]]
->  [[Integração por substituição de variável]] 
+>  [[Introdução - Integrais indefinidas]]
+>  [[Integração por substituição]] 
 >  [[Integração por partes]] 
 >  [[Integração por decomposição em frações parciais]] 
 >  [[Integração por substituição trigonométrica]]

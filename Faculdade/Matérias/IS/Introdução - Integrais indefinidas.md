@@ -18,7 +18,7 @@ O contrario de Derivada (antiderivada).
 
 $\large F(x)=\frac{x^3}{3+5}$ e $\large G(x)=\frac{x^3}{3-12}$ são primitivas de $\large f(x)=x^2$ . Isso significa que, derivando as duas, viram a mesma f(x)
 
-$\large F'(x)=\frac{3x²}{3}=x²$ e $\large G'(x)=\frac{3x²}{3}=x²$  
+$F'(x)=\frac{3x²}{3}=x²$ e $\large G'(x)=\frac{3x²}{3}=x²$  
 
 #### ex:
 
