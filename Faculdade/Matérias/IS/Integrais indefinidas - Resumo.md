@@ -52,3 +52,8 @@ II - $\large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$
 ## Tabela de integrais imediatas.
 
 ![[Tabela Integrais Imediatas]]
+
+
+#### exercicios:
+
+- 1 $\large \int \left( 4x²+3+\frac{x¹}{2} \right)$  
