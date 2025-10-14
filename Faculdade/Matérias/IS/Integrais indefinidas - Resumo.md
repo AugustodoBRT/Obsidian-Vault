@@ -36,9 +36,9 @@ $\large \int \cos u dx = senx + C$
 se $F(x)$ é a primitiva de $f(x)$, escreveremos $\large F(x) + C = \int f(x) dx$. 
 
 ### Propriedades:
-I - $\large \int k\cdot f(x)dx= k\cdot \int f(x)dx$ 
+$$I - \large \int k\cdot f(x)dx= k\cdot \int f(x)dx $$
 
-II - $\large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$ 
+$$II - \large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$$$
 
 #### ex:
 
@@ -56,5 +56,7 @@ II - $\large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$
 
 #### exercicios:
 
-- 1 - $\large \int \left( 4x²+3+x^{1/2} \right)dx$
-	
+- 1 - $\large \int \left( 4x²+3+x^{1/2} \right)dx$ - FORMULA USADA $\large \int u^ndu=\frac{u^{n+1}}{n+1}$
+
+	$\large \int 4x²dx + \int 3dx +\int x^{1/2}dx$ 
+		$\large \frac{4x³}{3} + \frac{3²}{2} + \frac{x^{1/2+1}}{\frac{1}{2}+1}+C$.
