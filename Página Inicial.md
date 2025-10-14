@@ -89,3 +89,35 @@ dv.paragraph(`<div style="
 > 
 ---
 
+## Focus Log
+- 2025-05-13: 2.5h [tag::coding]
+- 2025-05-14: 3h [tag::algorithms]
+
+## Yearly Analytics
+
+```tracker
+searchType: tag
+searchTarget: focus
+dataset:
+  - tag: coding
+  - tag: algorithms
+  - tag: physics
+  - tag: business
+  - tag: misc
+chart:
+  type: pie
+  title: "Focus Breakdown"
+  width: 400
+  height: 300
+```
+searchType: tag
+searchTarget: focus
+dataset:
+  - tag: coding
+  - tag: algorithms
+  - tag: physics
+chart:
+  type: calendar
+  title: "Focus Days"
+
+
