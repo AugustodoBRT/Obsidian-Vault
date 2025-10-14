@@ -77,14 +77,3 @@ $$II - \large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$$$
 | Cotangente | $\cot(x) = \frac{\cos(x)}{\sin(x)}$ | $\tan(x) = \frac{1}{\cot(x)} = \frac{\sin(x)}{\cos(x)}$ |
 
 ---
-
-### Observações
-
-- Recíproco ao quadrado:
-
-\[
-\frac{1}{\sin^2(x)} = \csc^2(x), \quad 
-\frac{1}{\cos^2(x)} = \sec^2(x)
-\]
-
-- Sempre que vir $1/\text{função}$, tente lembrar: é a **função recíproca** correspondente.
