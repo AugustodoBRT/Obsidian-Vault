@@ -64,7 +64,12 @@ $$II - \large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$$$
 	$\frac{4x³}{3} + \frac{3²}{2} + \frac{x^{1/2+1}}{\frac{1}{2}+1}+C$.
 
 - 2 - $\int\left( 5\cdot \frac{tgx}{\cos x}+ \frac{1}{sen²x}dx \right)$. FORMULA USADA $\int \sec u\cdot tgu\cdot du=\sec u+C$ e $\int \csc²u\cdot du=-\cot g\cdot u+C$ 
+
 	$\int (5\cdot tgx\cdot\frac{1}{\cos x}+\csc²x)dx$
+	
+	$\int (5\cdot tgx\cdot \sec x+\csc²x)dx$
+	
+	
 
 
 #### Para lembrar:
