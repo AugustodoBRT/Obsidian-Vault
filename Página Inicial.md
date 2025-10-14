@@ -20,6 +20,8 @@ include:
   - Tarefas
   - Estudo
   - Lazer
+  - Prova
+  - Faculdade
 
 hourRange:
   - 0
