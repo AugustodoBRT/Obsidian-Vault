@@ -52,7 +52,7 @@ materia: "[[Integração e Séries]]"
 
 ---
 
-##  Prova 2 - 01/02 ^prova2
+##  Prova 2 - 01/11 ^prova2
 
 #### Conteúdo 3: Séries Númericas ^conteudo3
 
