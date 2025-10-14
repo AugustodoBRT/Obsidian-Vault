@@ -56,4 +56,5 @@ II - $\large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$
 
 #### exercicios:
 
-- 1 $\large \int \left( 4x²+3+\frac{x¹}{2} \right)$  
+- 1 - $\large \int \left( 4x²+3+x^{1/2} \right)dx$
+	
