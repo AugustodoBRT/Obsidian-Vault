@@ -60,6 +60,7 @@ $$II - \large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$$$
 - 1 - $\int \left( 4x²+3+x^{1/2} \right)dx$ - FORMULA USADA $\int u^ndu=\frac{u^{n+1}}{n+1}$
 
 	$\int 4x²dx + \int 3dx +\int x^{1/2}dx$ 
+	
 		$\frac{4x³}{3} + \frac{3²}{2} + \frac{x^{1/2+1}}{\frac{1}{2}+1}+C$.
 
 - 2 - $\int\left( 5\cdot \frac{tgx}{\cos x}+ \frac{1}{sen²x}dx \right)$. FORMULA USADA $\int \sec u\cdot tgu\cdot du=\sec u+C$ e $\int \cos \sec²u\cdot du=-\cot g\cdot u+C$ 
