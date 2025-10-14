@@ -3,13 +3,13 @@ tipo: Trabalho
 titulo: AOC 01/25 - Exercicios Cap 02
 data: 06/10/2025
 relacionados:
-  - "[[cofrinho/AOC I]]"
+  - "[[aula 13-10]]"
 tags:
   - trabalho
   - faculdade
 cssclasses:
   - daily
-materia: "[[cofrinho/AOC I]]"
+materia: "[[aula 13-10]]"
 ---
 ### AOC 01/25 - Exercicios Cap 02
 
