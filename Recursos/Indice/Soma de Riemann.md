@@ -18,4 +18,4 @@ cssclasses:
 ---
 
 ## ✏️ Anotações Gerais
-z
+$$
