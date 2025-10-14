@@ -37,7 +37,7 @@ materia: "[[Integração e Séries]]"
 ##### Subconteudos:
 
 >  [[Definição e Propriedades]] 
->  [[Integrais indefinidas]]
+>  [[Integrais indefinidas - Resumo]]
 >  [[Integrais de funções elementares]] 
 >  [[Integração por substituição de variável]] 
 >  [[Integração por partes]] 
