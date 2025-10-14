@@ -42,12 +42,12 @@ $$II - \large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$$$
 
 #### ex:
 
-- A) $\large \int 2\cdot senx\cdot dx$ 
+- A) $\int 2\cdot senx\cdot dx$ 
 
-	= $\large 2\cdot \int senx\cdot dx$ = $\large 2\cdot-\cos x+C$. Pois a derivada de -cosx é senx.
+	= $2\cdot \int senx\cdot dx$ = $2\cdot-\cos x+C$. Pois a derivada de -cosx é senx.
 
 - B) $\large \int(e^x+x)\cdot dx$ 
-	= $\large \int e^x+C + \int x+C$ = $\large e^x + \frac{x²}{2}+C$. (integral de $\large e^x$ é o proprio $\large e^x$, pois essa é a sua derivada.)
+	= $\int e^x+C + \int x+C$ = $e^x + \frac{x²}{2}+C$. (integral de $\large e^x$ é o proprio $\large e^x$, pois essa é a sua derivada.)
 
 ## Tabela de integrais imediatas.
 
@@ -56,7 +56,8 @@ $$II - \large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$$$
 
 #### exercicios:
 
-- 1 - $\large \int \left( 4x²+3+x^{1/2} \right)dx$ - FORMULA USADA $\large \int u^ndu=\frac{u^{n+1}}{n+1}$
+- 1 - $\int \left( 4x²+3+x^{1/2} \right)dx$ - FORMULA USADA $\int u^ndu=\frac{u^{n+1}}{n+1}$
 
-	$\large \int 4x²dx + \int 3dx +\int x^{1/2}dx$ 
-		$\large \frac{4x³}{3} + \frac{3²}{2} + \frac{x^{1/2+1}}{\frac{1}{2}+1}+C$.
+	$\int 4x²dx + \int 3dx +\int x^{1/2}dx$ 
+		$\frac{4x³}{3} + \frac{3²}{2} + \frac{x^{1/2+1}}{\frac{1}{2}+1}+C$.
+		
