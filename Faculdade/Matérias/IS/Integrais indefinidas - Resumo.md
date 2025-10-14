@@ -42,7 +42,10 @@ II - $\large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$
 
 #### ex:
 
-A) $\large \int 2\cdot senx\cdot dx$ = $\large 2\cdot \int senx\cdot dx$ = $\large 2\cdot-\cos x+C$. Pois a derivada de -cosx é senx.
+- A) $\large \int 2\cdot senx\cdot dx$ 
 
-B) $\large \int(e^x+x)\cdot dx$ = $\large \int e^x+C + \int x+C$ = $\large e^x + \frac{x²}{2}+C$. (integral de $\large e^x$ é o proprio $\large e^x$, pois essa é a sua derivada.)
+	= $\large 2\cdot \int senx\cdot dx$ = $\large 2\cdot-\cos x+C$. Pois a derivada de -cosx é senx.
+
+- B) $\large \int(e^x+x)\cdot dx$ 
+	= $\large \int e^x+C + \int x+C$ = $\large e^x + \frac{x²}{2}+C$. (integral de $\large e^x$ é o proprio $\large e^x$, pois essa é a sua derivada.)
 
