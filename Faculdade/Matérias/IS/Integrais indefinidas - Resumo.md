@@ -67,4 +67,24 @@ $$II - \large \int(f(x)+g(x))dx = \int f(x)dx+\int g(x)dx$$$
 	$\int (5\cdot tgx\cdot\frac{1}{\cos x}+\csc²x)dx$
 
 
-$$ 
+#### Para lembrar:
+
+| Função     | Definição            | Recíproca           |
+|------------|--------------------|-------------------|
+| Seno       | $\sin(x)$          | $\csc(x) = \frac{1}{\sin(x)}$ |
+| Cosseno    | $\cos(x)$          | $\sec(x) = \frac{1}{\cos(x)}$ |
+| Tangente   | $\tan(x) = \frac{\sin(x)}{\cos(x)}$ | $\cot(x) = \frac{1}{\tan(x)} = \frac{\cos(x)}{\sin(x)}$ |
+| Cotangente | $\cot(x) = \frac{\cos(x)}{\sin(x)}$ | $\tan(x) = \frac{1}{\cot(x)} = \frac{\sin(x)}{\cos(x)}$ |
+
+---
+
+### Observações
+
+- Recíproco ao quadrado:
+
+\[
+\frac{1}{\sin^2(x)} = \csc^2(x), \quad 
+\frac{1}{\cos^2(x)} = \sec^2(x)
+\]
+
+- Sempre que vir $1/\text{função}$, tente lembrar: é a **função recíproca** correspondente.
