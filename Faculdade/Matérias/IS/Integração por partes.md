@@ -105,5 +105,5 @@ $\int x\cdot sen(5x)dx=x\cdot-\cos(5x)-\int-\cos(5x)\cdot dx$
 
 $=x\cdot-\cos(5x)-sen(5x)\cdot x$
 
-$x²\cdot-\cos(5x)-sen(5x)+C$
+$x²\cdot-\cos(5x)-sen(5x)+C$ 
 
