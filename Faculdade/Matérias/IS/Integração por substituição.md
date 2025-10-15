@@ -150,7 +150,7 @@ o u será a parte de baixo(so corrigir o sinal depois), logo entra na tabela de 
 
 $u=\cos(x+2)$
 
-$du=sen(x+2)dx$
+$du=-sen(x+2)dx$
 
 voltando na integral:
 
