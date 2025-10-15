@@ -10,4 +10,5 @@ tags:
 cssclasses:
   - daily
 ---
+
 ![[Tabela Integrais Imediatas.png]]

@@ -190,4 +190,7 @@ $\frac{1}{3} \frac{(3x-5)⁻⁷}{-7}+C$
 
 $-\frac{1}{21(3x-5)⁷} +C$ (fazendo mais malabarismo)
 
+---
+
+
 
