@@ -51,9 +51,9 @@ $du=1\cdot dx$
 
 $v=e^x$
 
-$dv=e^x$
+$dv=e^xdx$
 
 Jogando na formula -> $\int u\cdot dv=u\cdot v-\int v\cdot du$
 
-$\int x\cdot e^x=x\cdot e^x-\int e^x\cdot_{1}$
+$\int x\cdot e^x=x\cdot e^x-\int e^x\cdot dx$
 
