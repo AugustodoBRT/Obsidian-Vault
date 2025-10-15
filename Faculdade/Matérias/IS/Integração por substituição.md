@@ -114,8 +114,11 @@ $du=1\cdot dx$
 
 voltando na integral:
 
-$\int \cos(u)du$
+$\int \cos(u)du=sen u+C$ 
 
 subsituindo:
 
-$$
+$sen\cdot (x+7) +C$ 
+
+#### E) $\int tg(x+2)dx$
+
