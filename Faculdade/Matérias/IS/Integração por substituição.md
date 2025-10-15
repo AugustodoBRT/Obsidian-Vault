@@ -134,3 +134,5 @@ voltando na integral:
 
 $\int tg(u)du$
 
+```
+Raciocinio incorreto, pois esqueci que tg = sen/cos e pode substituir e se for deixar so tg não da pra integrar (ou na videoaula o professor nao quis)
