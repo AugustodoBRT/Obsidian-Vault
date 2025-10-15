@@ -10,8 +10,6 @@
 >> 
 
 ---
-<iframe src="https://calendar.google.com/calendar/u/0/r"
-        style="width:100%; height:700px; border:0;"></iframe>
 
 
 ---
