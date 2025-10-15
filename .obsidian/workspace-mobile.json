@@ -11,14 +11,13 @@
             "id": "5cc77ee51569c986",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "Recursos/Indice/Trigonometria-base.md",
-                "mode": "source",
-                "source": false
+                "file": "Bases/Biblioteca/Livros.base",
+                "viewName": "Livros"
               },
-              "icon": "lucide-file",
-              "title": "Trigonometria-base"
+              "icon": "lucide-layout-grid",
+              "title": "Livros"
             }
           }
         ]
@@ -157,6 +156,8 @@
   "active": "5cc77ee51569c986",
   "lastOpenFiles": [
     "Bases/Faculdade/6º Periodo/IS.base",
+    "Bases/Faculdade/6º Periodo/AED I.base",
+    "Bases/Biblioteca/Livros.base",
     "Recursos/Indice/Trigonometria-base.md",
     "Recursos/Indice/Soma de Riemann.md",
     "Recursos/Indice/Definição e Propriedades.md",
@@ -180,7 +181,6 @@
     "Capitulo 5 elementos de calculo.md",
     "Bases/Biblioteca/Jogos.base",
     "Bases/Biblioteca/Filmes e Séries.base",
-    "Bases/Faculdade/6º Periodo/AED I.base",
     "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf"
   ]
 }

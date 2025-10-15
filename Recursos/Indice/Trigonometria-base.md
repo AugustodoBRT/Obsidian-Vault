@@ -1,5 +1,5 @@
 ---
-materia: Trigonometria
+materia: "[[Trigonometria]]"
 tipo: anotação
 conteudo: Integrais Indefinidas
 relacionados:
