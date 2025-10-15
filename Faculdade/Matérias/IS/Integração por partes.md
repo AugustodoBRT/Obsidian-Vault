@@ -71,7 +71,7 @@ o dv poderia ser o 1 e o u poderia ser o lnx (pois derivade de lnx é 1/x)
 
 $u=\ln x$
 
-$du=\frac{1}{x}dx$
+$du=\frac{1}{x}dx=\frac{dx}{x}$
 
 $dv=1dx$
 
@@ -79,7 +79,12 @@ $v=x$
 
 Jogando na Formula $\int u\cdot dv=u\cdot v-\int v\cdot du$
 
-$\int 1\cdot \ln xdx=\ln x\cdot x-\int x\cdot \frac{1}{x}dx$
+$\int 1\cdot \ln xdx=\ln x\cdot x-\int x\cdot \frac{dx}{x}$
 
-$=\ln x²$
- 
+$=x\cdot \ln x-\int dx$
+
+$=x\cdot \ln x-x +C$ 
+
+#### C) $\int x\cdot sen(5x)dx$
+
+```
