@@ -4,7 +4,8 @@ views:
   - type: cards
     name: Livros
     filters:
-      and:
+      or:
+        - file.inFolder("MyVault/Recursos/Biblioteca/Livros")
         - file.inFolder("Recursos/Biblioteca/Livros")
     order:
       - file.name
