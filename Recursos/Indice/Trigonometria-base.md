@@ -1,9 +1,9 @@
 ---
-materia: "[[Integração e Séries]]"
+materia: Trigonometria
 tipo: anotação
 conteudo: Integrais Indefinidas
 relacionados:
-  - "[[Trigonometria]]"
+  - "[[Integração e Séries]]"
 tags:
   - estudo
   - faculdade
