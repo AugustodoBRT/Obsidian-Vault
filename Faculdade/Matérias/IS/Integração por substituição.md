@@ -164,5 +164,15 @@ $-\ln |\cos(x+2)| +C$
 
 #### F) $\int \frac{dx}{(3x-5)⁸}$
 
+```
+3x-5 sera o u, pois quando for uma questão apenas de numero da pra resolver sem problemas
+```
 
+$u=3x-5$
+
+$du=3\cdot dx$
+
+voltando na integral:
+
+$\int d$
 
