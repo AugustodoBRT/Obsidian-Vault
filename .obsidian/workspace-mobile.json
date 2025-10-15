@@ -11,10 +11,13 @@
             "id": "5cc77ee51569c986",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "bases",
+              "state": {
+                "file": "Bases/Faculdade/6º Periodo/IS.base",
+                "viewName": "Tabela"
+              },
+              "icon": "lucide-table",
+              "title": "IS"
             }
           }
         ]
@@ -152,6 +155,12 @@
   },
   "active": "5cc77ee51569c986",
   "lastOpenFiles": [
+    "Recursos/Indice/Definição e Propriedades.md",
+    "Bases/Faculdade/6º Periodo/IS.base",
+    "Recursos/Indice/Regra da Cadeia.md",
+    "Pessoal/Journal/Daily Notes/15-10-2025.md",
+    "Faculdade/Matérias/IS/Integração por substituição.md",
+    "Faculdade/Matérias/IS/Integração por partes.md",
     "Recursos/Indice/Pesquisa Binária.md",
     "Recursos/Indice/Complexidade de Algoritmos.md",
     "Faculdade/Matérias/AED I/AED I.md",
@@ -159,7 +168,6 @@
     "Faculdade/Matérias/IS/Integração e Séries.md",
     "Pessoal/Journal/Daily Notes/14-10-2025.md",
     "Entendendo Algoritmos.pdf.md",
-    "Bases/Faculdade/6º Periodo/IS.base",
     "Templates/SESSION-TEMPLATE.md",
     "Recursos/Pdfs/aoc/tp01.pdf",
     "Recursos/Pdfs/aoc",
