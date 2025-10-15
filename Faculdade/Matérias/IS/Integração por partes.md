@@ -73,7 +73,7 @@ $u=\ln x$
 
 $du=\frac{1}{x}dx$
 
-$dv=1$
+$dv=1dx$
 
 $v=x$
 
@@ -82,3 +82,4 @@ Jogando na Formula $\int u\cdot dv=u\cdot v-\int v\cdot du$
 $\int 1\cdot \ln xdx=\ln x\cdot x-\int x\cdot \frac{1}{x}dx$
 
 $=\ln x²$
+ 
