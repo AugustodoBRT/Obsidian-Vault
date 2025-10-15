@@ -122,3 +122,15 @@ $sen\cdot (x+7) +C$
 
 #### E) $\int tg(x+2)dx$
 
+```
+mesma coisa, (x+2) será o u, pois da 1 e derivada de tg não se encontra na expressão.
+```
+
+$u=x+2$
+
+$du=1\cdot dx$
+
+voltando na integral:
+
+$\int tg(u)du$
+
