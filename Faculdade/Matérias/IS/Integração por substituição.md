@@ -120,6 +120,8 @@ subsituindo:
 
 $sen\cdot (x+7) +C$ 
 
+---
+
 #### E) $\int tg(x+2)dx$ =ERREI
 
 ```
@@ -137,4 +139,25 @@ $\int tg(u)du$
 ```
 Raciocinio incorreto, pois esqueci que tg = sen/cos e pode substituir e se for deixar so tg não da pra integrar (da mas tem que fazer esse processo).
 ```
+
+Raciocinio correto:
+
+$\int tg(x+2)dx=\int \frac{sen(x+2)}{\cos(x+2)}dx$
+
+```
+o u será a parte de baixo(so corrigir o sinal depois), logo entra na tabela de integrais ln u + C. (o sen não será o u, porque não vira uma integral imediata.)
+```
+
+$u=\cos(x+2)$
+
+$du=sen(x+2)dx$
+
+voltando na integral:
+
+$\int \frac{du}{u}$
+
+Resolvendo:
+
+$\ln \cos(x+2) +C$
+
 
