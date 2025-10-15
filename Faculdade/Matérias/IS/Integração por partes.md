@@ -88,3 +88,22 @@ $=x\cdot \ln x-x +C$
 #### C) $\int x\cdot sen(5x)dx$
 
 ```
+melhor o u ser o x pois a derivada dele é 1 e o dv ser o sen(5x) pois a integral dele é -cos(5x)
+```
+
+$u=x$
+
+$du=1dx$
+
+$dv=sen(5x)dx$
+
+$v=-\cos(5x)$
+
+Jogando na Formula -> $\int u\cdot dv=u\cdot v-\int v\cdot du$
+
+$\int x\cdot sen(5x)dx=x\cdot-\cos(5x)-\int-\cos(5x)\cdot dx$
+
+$=x\cdot-\cos(5x)-sen(5x)\cdot x$
+
+$x²\cdot-\cos(5x)-sen(5x)+C$
+
