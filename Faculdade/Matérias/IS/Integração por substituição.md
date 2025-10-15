@@ -50,3 +50,17 @@ $\frac{(2x³-1)¹⁰⁰}{100} +C$. E esse é o resultado.
 
 #### B) $\int sen²x\cdot \cos x dx$
 
+```
+senx é o U pois a derivada do sen é cos.
+```
+
+$u=senx$
+
+$\frac{du}{dx}=\cos x$ então
+
+$du=\cos x\cdot dx$
+
+voltando na integral:
+
+$\int u^2\cdot du$.
+
