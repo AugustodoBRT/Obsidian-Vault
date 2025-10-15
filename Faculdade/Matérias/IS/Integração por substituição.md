@@ -2,7 +2,8 @@
 materia: "[[Integração e Séries]]"
 tipo: anotação
 conteudo: Integrais Indefinidas
-relacionados: []
+relacionados:
+  - "[[Introdução - Integrais indefinidas]]"
 tags:
   - estudo
   - faculdade
