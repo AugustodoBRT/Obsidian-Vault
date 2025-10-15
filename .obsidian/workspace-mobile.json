@@ -11,13 +11,14 @@
             "id": "5cc77ee51569c986",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "Bases/Faculdade/6º Periodo/IS.base",
-                "viewName": "Tabela"
+                "file": "Recursos/Indice/Trigonometria-base.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
-              "title": "IS"
+              "icon": "lucide-file",
+              "title": "Trigonometria-base"
             }
           }
         ]
@@ -155,8 +156,10 @@
   },
   "active": "5cc77ee51569c986",
   "lastOpenFiles": [
-    "Recursos/Indice/Definição e Propriedades.md",
     "Bases/Faculdade/6º Periodo/IS.base",
+    "Recursos/Indice/Trigonometria-base.md",
+    "Recursos/Indice/Soma de Riemann.md",
+    "Recursos/Indice/Definição e Propriedades.md",
     "Recursos/Indice/Regra da Cadeia.md",
     "Pessoal/Journal/Daily Notes/15-10-2025.md",
     "Faculdade/Matérias/IS/Integração por substituição.md",
@@ -171,7 +174,6 @@
     "Templates/SESSION-TEMPLATE.md",
     "Recursos/Pdfs/aoc/tp01.pdf",
     "Recursos/Pdfs/aoc",
-    "Recursos/Indice/Trigonometria-base.md",
     "Recursos/Indice/Tabela Integrais Imediatas.png",
     "Faculdade/Matérias/IS/Tabela Integrais Imediatas.md",
     "Faculdade/Matérias/AOC I/TP01.md",
