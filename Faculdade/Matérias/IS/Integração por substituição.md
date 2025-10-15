@@ -102,3 +102,20 @@ Sempre que for uma fração e a derivada do de baixo aparece em cima, sempre vai
 
 #### D) $\int \cos(x+7)dx$
 
+```
+O cos não pode ser nosso u porque não tem nenhum -sen na expressão, logo vai ter que ser o (x +7) que da 1, o número 1 ta implicito na expressão, visto que pode ser 1.dx, logo ele sera nosso u.
+```
+
+$u=x+7$
+
+$\frac{du}{dx}=1$ então
+
+$du=1\cdot dx$
+
+voltando na integral:
+
+$\int \cos(u)du$
+
+subsituindo:
+
+$$
