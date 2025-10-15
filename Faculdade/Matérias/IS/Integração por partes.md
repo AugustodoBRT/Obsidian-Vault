@@ -67,3 +67,18 @@ quando tiver so uma expressão assim, é so pagar de doido e imaginar que ta sen
 o dv poderia ser o 1 e o u poderia ser o lnx (pois derivade de lnx é 1/x)
 ```
 
+"Reescrevendo" -> $\int 1\cdot \ln xdx$
+
+$u=\ln x$
+
+$du=\frac{1}{x}dx$
+
+$dv=1$
+
+$v=x$
+
+Jogando na Formula $\int u\cdot dv=u\cdot v-\int v\cdot du$
+
+$\int 1\cdot \ln xdx=\ln x\cdot x-\int x\cdot \frac{1}{x}dx$
+
+$=\ln x²$
