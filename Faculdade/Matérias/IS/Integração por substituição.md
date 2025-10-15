@@ -26,7 +26,9 @@ Trocando o $g(x)$ por u vou ter $F'(u)\cdot du=F(u)+C$
 
 Sempre "enxergar" uma função u e sua derivada dentro da função.
 
-#### exemplo:
+---
+
+#### exercicios:
 
 #### A) $\int 6x²\cdot(2x³-1)^9⁹dx$.
 
@@ -48,6 +50,8 @@ $\frac{u¹⁰⁰}{100}+C$  Porém a resposta não pode ficar em U.
 
 $\frac{(2x³-1)¹⁰⁰}{100} +C$. E esse é o resultado.
 
+---
+
 #### B) $\int sen²x\cdot \cos x dx$
 
 ```
@@ -62,7 +66,34 @@ $du=\cos x\cdot dx$
 
 voltando na integral:
 
-$\int u^2\cdot du$.
+$\int u^2\cdot du$ 
 
-$\frac{senx³}{3} +C$ 
+$\frac{senx³}{3} +C$ Resultado já aplicando a integral imediata.
+
+---
+
+#### C) $\int \frac{2x}{1+x²} dx$
+
+```
+1+x² será o U pois derivando se encontra 2x (que está na integral)
+```
+
+$u=1+x²$
+
+$\frac{du}{dx} = 2x$ então
+
+$du=2x\cdot dx$
+
+Voltando na integral:
+
+$\int \frac{du}{u}$
+
+```Integral Imediata
+De acordo com a tabela de Integrais imediatas
+du/u = ln u + C
+```
+
+$\ln 1+x² +C$.
+
+
 
