@@ -97,7 +97,7 @@ $du=1dx$
 
 $dv=sen(5x)dx$
 
-$v=-\cos(5x)$
+$v=-\cos(5x)$ ERRADO, corrigir depois
 
 Jogando na Formula -> $\int u\cdot dv=u\cdot v-\int v\cdot du$
 
