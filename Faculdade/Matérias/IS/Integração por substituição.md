@@ -200,4 +200,9 @@ $u=5x$
 
 $du=5\cdot dx$
 
+$dx=\frac{du}{5}$
+
+voltando na integral
+
+$\int sen(u)\cdot \frac{du}{5}$
 
