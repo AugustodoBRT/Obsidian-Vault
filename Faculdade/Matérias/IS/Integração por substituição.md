@@ -206,3 +206,9 @@ voltando na integral
 
 $\int sen(u)\cdot \frac{du}{5}$
 
+$\frac{1}{5}\int sen(u)du$
+
+$\frac{1}{5}(-\cos(u)+C)$
+
+$-\frac{\cos(5x)}{5}+C$
+
