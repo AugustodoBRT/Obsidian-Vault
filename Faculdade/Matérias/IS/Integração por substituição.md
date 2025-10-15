@@ -96,5 +96,9 @@ du/u = ln u + C
 
 $\ln 1+x² +C$.
 
+```DICA
+Sempre que for uma fração e a derivada do de baixo aparece em cima, sempre vai ser ln devido a tabela de integral imediata
+```
 
+#### D) $\int \cos(x+7)dx$
 
