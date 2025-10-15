@@ -55,5 +55,9 @@ $dv=e^xdx$
 
 Jogando na formula -> $\int u\cdot dv=u\cdot v-\int v\cdot du$
 
-$\int x\cdot e^x=x\cdot e^x-\int e^x\cdot dx$
+$\int x\cdot e^xdx=x\cdot e^x-\int e^x\cdot dx$
+
+$x\cdot e^x-e^x+c$
+
+#### B) $\int \ln xdx$
 
