@@ -8,7 +8,7 @@ autor: Aditya Y. Bhargava
 Páginas: "310"
 Publicado: 2018-03-01
 Cover: http://books.google.com/books/content?id=t5RODwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api
-Status: Quero ler
+Status: Lendo
 Inicio:
 Termino:
 Tempo Lendo:
