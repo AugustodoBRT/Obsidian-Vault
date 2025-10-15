@@ -11,14 +11,13 @@
             "id": "5cc77ee51569c986",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "Recursos/Biblioteca/Livros/Programming with Java -.md",
-                "mode": "source",
-                "source": false
+                "file": "Bases/Biblioteca/Livros.base",
+                "viewName": "Livros"
               },
-              "icon": "lucide-file",
-              "title": "Programming with Java -"
+              "icon": "lucide-layout-grid",
+              "title": "Livros"
             }
           }
         ]
@@ -98,7 +97,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Recursos/Biblioteca/Livros/Programming with Java -.md",
+            "file": "Bases/Biblioteca/Livros.base",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -155,8 +154,10 @@
       "pdf-plus:PDF++: Toggle auto-paste": false
     }
   },
-  "active": "5cc77ee51569c986",
+  "active": "a341ffa8627bd93e",
   "lastOpenFiles": [
+    "MyVault",
+    "Recursos/Biblioteca/Livros/Programming with Java -.md",
     "Bases/Biblioteca/Livros.base",
     "Bases/Faculdade/6º Periodo/IS.base",
     "Bases/Faculdade/6º Periodo/AED I.base",
