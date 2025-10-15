@@ -170,9 +170,23 @@ $-\ln |\cos(x+2)| +C$
 
 $u=3x-5$
 
-$du=3\cdot dx$
+$du=3\cdot dx$ nesse caso pode isolar o dx para conseguir resolver
+
+$\frac{du}{3}=dx$
 
 voltando na integral:
 
-$\int d$
+$\int \frac{\frac{du}{3}}{(u)⁸}$ repete a de cima e multiplica pela inverso da de baixo
+
+$\int \frac{du}{3}\cdot \frac{1}{u⁸}$ fazendo um malabarismo tira o 1/3 da integral e sobe o u⁸ usando propriedade de potencia (nao lembro)
+
+$\frac{1}{3} \int u⁻⁸ du$ (caiu na integral imediata basica)
+
+$\frac{1}{3} \frac{u⁻⁷}{-7} du$
+
+substituindo:
+
+$\frac{1}{3} \frac{(3x-5)⁻⁷}{-7}+C$
+
+
 
