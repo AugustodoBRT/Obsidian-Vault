@@ -194,3 +194,10 @@ $-\frac{1}{21(3x-5)⁷} +C$ (fazendo mais malabarismo)
 
 
 
+$sen(5x)dx$
+
+$u=5x$
+
+$du=5\cdot dx$
+
+
