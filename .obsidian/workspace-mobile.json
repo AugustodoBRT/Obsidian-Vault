@@ -4,20 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "f62909ba45bda350",
+        "id": "0d1d8b532298f2a1",
         "type": "tabs",
         "children": [
           {
-            "id": "8c85ded857fa8565",
+            "id": "5cc77ee51569c986",
             "type": "leaf",
             "state": {
-              "type": "bases",
-              "state": {
-                "file": "Bases/Faculdade/6º Periodo/IS.base",
-                "viewName": "Tabela"
-              },
-              "icon": "lucide-table",
-              "title": "IS"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -153,12 +150,26 @@
       "pdf-plus:PDF++: Toggle auto-paste": false
     }
   },
-  "active": "8c85ded857fa8565",
+  "active": "5cc77ee51569c986",
   "lastOpenFiles": [
+    "Recursos/Indice/Pesquisa Binária.md",
+    "Recursos/Indice/Complexidade de Algoritmos.md",
+    "Faculdade/Matérias/AED I/AED I.md",
+    "Faculdade/Matérias/IS/Introdução - Integrais indefinidas.md",
+    "Faculdade/Matérias/IS/Integração e Séries.md",
+    "Pessoal/Journal/Daily Notes/14-10-2025.md",
+    "Entendendo Algoritmos.pdf.md",
+    "Bases/Faculdade/6º Periodo/IS.base",
+    "Templates/SESSION-TEMPLATE.md",
+    "Recursos/Pdfs/aoc/tp01.pdf",
+    "Recursos/Pdfs/aoc",
+    "Recursos/Indice/Trigonometria-base.md",
+    "Recursos/Indice/Tabela Integrais Imediatas.png",
+    "Faculdade/Matérias/IS/Tabela Integrais Imediatas.md",
+    "Faculdade/Matérias/AOC I/TP01.md",
     "Capitulo 5 elementos de calculo.md",
     "Bases/Biblioteca/Jogos.base",
     "Bases/Biblioteca/Filmes e Séries.base",
-    "Bases/Faculdade/6º Periodo/IS.base",
     "Bases/Faculdade/6º Periodo/AED I.base",
     "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf"
   ]
