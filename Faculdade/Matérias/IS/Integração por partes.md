@@ -61,3 +61,9 @@ $x\cdot e^x-e^x+c$
 
 #### B) $\int \ln xdx$
 
+```
+quando tiver so uma expressão assim, é so pagar de doido e imaginar que ta sendo multiplicado por 1 entao seria 1.lnxdx
+
+o dv poderia ser o 1 e o u poderia ser o lnx (pois derivade de lnx é 1/x)
+```
+
