@@ -120,7 +120,7 @@ subsituindo:
 
 $sen\cdot (x+7) +C$ 
 
-#### E) $\int tg(x+2)dx$
+#### E) $\int tg(x+2)dx$ =ERREI
 
 ```
 mesma coisa, (x+2) será o u, pois da 1 e derivada de tg não se encontra na expressão.
