@@ -64,3 +64,5 @@ voltando na integral:
 
 $\int u^2\cdot du$.
 
+$\frac{senx³}{3} +C$ 
+
