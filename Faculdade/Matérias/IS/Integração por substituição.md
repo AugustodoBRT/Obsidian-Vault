@@ -154,10 +154,15 @@ $du=-sen(x+2)dx$
 
 voltando na integral:
 
-$\int \frac{du}{u}$
+$\int \frac{-du}{u}=-\ln|u|+C$ Para inverter o sinal do -sen basta multiplicat dos dois lados por -1 ficando -du (assim da certo a integral imediata)
 
 Resolvendo:
 
-$\ln \cos(x+2) +C$
+$-\ln |\cos(x+2)| +C$
+
+---
+
+#### F) $\int \frac{dx}{(3x-5)⁸}$
+
 
 
