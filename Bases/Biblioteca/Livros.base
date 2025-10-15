@@ -5,7 +5,7 @@ views:
     name: Livros
     filters:
       and:
-        - file.inFolder("MyVault/Recursos/Biblioteca/Livros")
+        - file.inFolder("Recursos/Biblioteca/Livros")
     order:
       - file.name
       - autor

@@ -11,13 +11,14 @@
             "id": "5cc77ee51569c986",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "Bases/Biblioteca/Livros.base",
-                "viewName": "Livros"
+                "file": "Recursos/Biblioteca/Livros/Programming with Java -.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-grid",
-              "title": "Livros"
+              "icon": "lucide-file",
+              "title": "Programming with Java -"
             }
           }
         ]
@@ -97,6 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
+            "file": "Recursos/Biblioteca/Livros/Programming with Java -.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -155,9 +157,9 @@
   },
   "active": "5cc77ee51569c986",
   "lastOpenFiles": [
+    "Bases/Biblioteca/Livros.base",
     "Bases/Faculdade/6º Periodo/IS.base",
     "Bases/Faculdade/6º Periodo/AED I.base",
-    "Bases/Biblioteca/Livros.base",
     "Recursos/Indice/Trigonometria-base.md",
     "Recursos/Indice/Soma de Riemann.md",
     "Recursos/Indice/Definição e Propriedades.md",
