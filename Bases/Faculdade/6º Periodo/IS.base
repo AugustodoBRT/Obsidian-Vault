@@ -1,19 +1,20 @@
 views:
-  - type: cards
+  - type: table
     name: Tabela
     filters:
       and:
         - materia == link("Integração e Séries")
     order:
       - file.name
-      - file.ctime
       - tipo
+      - file.ctime
     sort:
       - property: file.ctime
         direction: ASC
     rowHeight: medium
     columnSize:
       file.name: 277
+      note.tipo: 112
       file.ctime: 224
   - type: table
     name: Visualizaçao padrão
