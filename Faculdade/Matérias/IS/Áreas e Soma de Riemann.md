@@ -14,8 +14,12 @@ cssclasses:
 
 #### **Resumo:**
 
+A soma de Riemann, vem do antigo método da exaustão, o aperfeiçõando.
 
 ---
 
 ## ✏️ Anotações Gerais
+
+#### Formula:
+
 
