@@ -22,4 +22,9 @@ A soma de Riemann, vem do antigo método da exaustão, o aperfeiçõando.
 
 #### Formula:
 
+$$
+\sum_{i=1}^{n}\Delta x i\cdot f(ci)
+$$
+
+
 
