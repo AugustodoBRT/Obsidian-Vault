@@ -11,13 +11,14 @@
             "id": "5cc77ee51569c986",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "Bases/Biblioteca/Livros.base",
-                "viewName": "Livros"
+                "file": "Recursos/Biblioteca/Livros/Entendendo Algoritmos - Aditya Y Bhargava.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-grid",
-              "title": "Livros"
+              "icon": "lucide-file",
+              "title": "Entendendo Algoritmos - Aditya Y Bhargava"
             }
           }
         ]
@@ -48,7 +49,7 @@
         "state": {
           "type": "search",
           "state": {
-            "query": "",
+            "query": "tag:#mediaDB/tv/movie",
             "matchingCase": false,
             "explainSearch": false,
             "collapseAll": false,
@@ -85,7 +86,7 @@
         }
       }
     ],
-    "currentTab": 0
+    "currentTab": 1
   },
   "right": {
     "id": "e6689a208c48d9f1",
@@ -97,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Bases/Biblioteca/Livros.base",
+            "file": "Recursos/Biblioteca/Livros/Entendendo Algoritmos - Aditya Y Bhargava.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -154,11 +155,13 @@
       "pdf-plus:PDF++: Toggle auto-paste": false
     }
   },
-  "active": "a341ffa8627bd93e",
+  "active": "5cc77ee51569c986",
   "lastOpenFiles": [
+    "Faculdade/Matérias/IS/Integração e Séries.md",
+    "Recursos/Biblioteca/Livros/Entendendo Algoritmos - Aditya Y Bhargava.md",
+    "Bases/Biblioteca/Livros.base",
     "MyVault",
     "Recursos/Biblioteca/Livros/Programming with Java -.md",
-    "Bases/Biblioteca/Livros.base",
     "Bases/Faculdade/6º Periodo/IS.base",
     "Bases/Faculdade/6º Periodo/AED I.base",
     "Recursos/Indice/Trigonometria-base.md",
@@ -172,7 +175,6 @@
     "Recursos/Indice/Complexidade de Algoritmos.md",
     "Faculdade/Matérias/AED I/AED I.md",
     "Faculdade/Matérias/IS/Introdução - Integrais indefinidas.md",
-    "Faculdade/Matérias/IS/Integração e Séries.md",
     "Pessoal/Journal/Daily Notes/14-10-2025.md",
     "Entendendo Algoritmos.pdf.md",
     "Templates/SESSION-TEMPLATE.md",
