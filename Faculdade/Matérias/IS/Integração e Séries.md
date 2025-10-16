@@ -10,6 +10,7 @@ cssclasses:
   - segunda-feira
 materia: "[[Integração e Séries]]"
 ---
+
 ---
 # Integração e Séries
 ---
@@ -73,3 +74,7 @@ materia: "[[Integração e Séries]]"
 - **Palavras-chave:** raio de convergência, intervalo de convergência, expansão em série, série de Taylor, série de Maclaurin
 
 ---
+
+#### Plano de Ensino:
+
+![[PDIS.pdf]]
