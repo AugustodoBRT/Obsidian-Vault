@@ -108,3 +108,4 @@ $=x\cdot-\cos(5x)-sen(5x)\cdot x$
 
 $x²\cdot-\cos(5x)-sen(5x)+C$ 
 
+
