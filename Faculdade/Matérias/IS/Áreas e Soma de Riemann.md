@@ -19,5 +19,3 @@ cssclasses:
 
 ## ✏️ Anotações Gerais
 
-
-
