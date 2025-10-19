@@ -11,14 +11,14 @@
             "id": "3a936e68eb88af48",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf",
-                "page": 1,
-                "zoom": 1
+                "file": "Pessoal/Senha.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "Entendendo Algoritmos"
+              "icon": "lucide-file",
+              "title": "Senha"
             }
           }
         ]
@@ -187,6 +187,7 @@
   },
   "active": "3a936e68eb88af48",
   "lastOpenFiles": [
+    "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf",
     "Capitulo 5 elementos de calculo.md",
     "Faculdade/Matérias/IS/Integração e Séries.md",
     "Faculdade/Matérias/IS/Integração por partes.md",
@@ -194,7 +195,6 @@
     "Bases/Programação/Java.base",
     "Untitled.md",
     "Recursos/Biblioteca/Livros/Entendendo Algoritmos - Aditya Y Bhargava.md",
-    "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf",
     "Recursos/Pdfs/calculo/PDIS.pdf",
     "Pessoal/Journal/Daily Notes/16-10-2025.md",
     "Indice/WORA.md",
@@ -226,7 +226,6 @@
     "Indice/Classe.md",
     "Indice/Borders.md",
     "Indice/aula 13-10.md",
-    "Indice/atributo.md",
     "Indice",
     "Bases/Biblioteca/Livros.base",
     "MyVault",
