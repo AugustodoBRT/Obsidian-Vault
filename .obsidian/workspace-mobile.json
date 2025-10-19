@@ -20,8 +20,19 @@
               "icon": "lucide-file",
               "title": "Entendendo Algoritmos - Aditya Y Bhargava"
             }
+          },
+          {
+            "id": "ffc098eb42b5ed26",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -49,7 +60,7 @@
         "state": {
           "type": "search",
           "state": {
-            "query": "tag:#mediaDB/tv/movie",
+            "query": "tag:#Daily",
             "matchingCase": false,
             "explainSearch": false,
             "collapseAll": false,
@@ -86,7 +97,7 @@
         }
       }
     ],
-    "currentTab": 1
+    "currentTab": 0
   },
   "right": {
     "id": "e6689a208c48d9f1",
@@ -98,7 +109,6 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Recursos/Biblioteca/Livros/Entendendo Algoritmos - Aditya Y Bhargava.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -155,37 +165,53 @@
       "pdf-plus:PDF++: Toggle auto-paste": false
     }
   },
-  "active": "5cc77ee51569c986",
+  "active": "ffc098eb42b5ed26",
   "lastOpenFiles": [
+    "Capitulo 5 elementos de calculo.md",
     "Faculdade/Matérias/IS/Integração e Séries.md",
+    "Faculdade/Matérias/IS/Integração por partes.md",
+    "Bases/Faculdade/6º Periodo/IS.base",
+    "Bases/Programação/Java.base",
+    "Untitled.md",
     "Recursos/Biblioteca/Livros/Entendendo Algoritmos - Aditya Y Bhargava.md",
+    "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf",
+    "Recursos/Pdfs/calculo/PDIS.pdf",
+    "Pessoal/Journal/Daily Notes/16-10-2025.md",
+    "Indice/WORA.md",
+    "Indice/variavel.md",
+    "Indice/UML.md",
+    "Indice/Trigonometria-base.md",
+    "Indice/Tabela Integrais Imediatas.png",
+    "Indice/Regra do Produto.md",
+    "Indice/Regra da Cadeia.md",
+    "Indice/Pesquisa Binária.md",
+    "Indice/Pasted image 20250504021527.png",
+    "Indice/Pasted image 20250504021320.png",
+    "Indice/Pasted image 20250504021033.png",
+    "Indice/Pasted image 20250504020845.png",
+    "Indice/Pasted image 20250504020729.png",
+    "Indice/Pasted image 20250504020604.png",
+    "Indice/Pasted image 20250504020126.png",
+    "Indice/Pasted image 20250504015827.png",
+    "Indice/Pasted image 20250504015535.png",
+    "Indice/método.md",
+    "Indice/Lista de Tarefas Diárias.md",
+    "Indice/IDE.md",
+    "Indice/h1.md",
+    "Indice/estado.md",
+    "Indice/Education Plan.md",
+    "Indice/CSS.md",
+    "Indice/Cronograma de Provas e Trabalhos.md",
+    "Indice/Complexidade de Algoritmos.md",
+    "Indice/Classe.md",
+    "Indice/Borders.md",
+    "Indice/aula 13-10.md",
+    "Indice/atributo.md",
+    "Indice",
     "Bases/Biblioteca/Livros.base",
     "MyVault",
-    "Recursos/Biblioteca/Livros/Programming with Java -.md",
-    "Bases/Faculdade/6º Periodo/IS.base",
     "Bases/Faculdade/6º Periodo/AED I.base",
-    "Recursos/Indice/Trigonometria-base.md",
-    "Recursos/Indice/Soma de Riemann.md",
-    "Recursos/Indice/Definição e Propriedades.md",
-    "Recursos/Indice/Regra da Cadeia.md",
-    "Pessoal/Journal/Daily Notes/15-10-2025.md",
-    "Faculdade/Matérias/IS/Integração por substituição.md",
-    "Faculdade/Matérias/IS/Integração por partes.md",
-    "Recursos/Indice/Pesquisa Binária.md",
-    "Recursos/Indice/Complexidade de Algoritmos.md",
-    "Faculdade/Matérias/AED I/AED I.md",
-    "Faculdade/Matérias/IS/Introdução - Integrais indefinidas.md",
-    "Pessoal/Journal/Daily Notes/14-10-2025.md",
-    "Entendendo Algoritmos.pdf.md",
-    "Templates/SESSION-TEMPLATE.md",
     "Recursos/Pdfs/aoc/tp01.pdf",
-    "Recursos/Pdfs/aoc",
-    "Recursos/Indice/Tabela Integrais Imediatas.png",
-    "Faculdade/Matérias/IS/Tabela Integrais Imediatas.md",
-    "Faculdade/Matérias/AOC I/TP01.md",
-    "Capitulo 5 elementos de calculo.md",
-    "Bases/Biblioteca/Jogos.base",
-    "Bases/Biblioteca/Filmes e Séries.base",
-    "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf"
+    "Recursos/Pdfs/aoc"
   ]
 }
