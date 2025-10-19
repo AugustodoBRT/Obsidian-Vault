@@ -4,6 +4,28 @@
     "type": "split",
     "children": [
       {
+        "id": "f566b2d8fdf80add",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3a936e68eb88af48",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Recursos/Pdfs/programação/Entendendo Algoritmos.pdf",
+                "page": 37,
+                "left": 3,
+                "top": 798,
+                "zoom": 0.49754901960784315
+              },
+              "icon": "lucide-file-text",
+              "title": "Entendendo Algoritmos"
+            }
+          }
+        ]
+      },
+      {
         "id": "0d1d8b532298f2a1",
         "type": "tabs",
         "children": [
@@ -165,7 +187,7 @@
       "pdf-plus:PDF++: Toggle auto-paste": false
     }
   },
-  "active": "ffc098eb42b5ed26",
+  "active": "3a936e68eb88af48",
   "lastOpenFiles": [
     "Capitulo 5 elementos de calculo.md",
     "Faculdade/Matérias/IS/Integração e Séries.md",
