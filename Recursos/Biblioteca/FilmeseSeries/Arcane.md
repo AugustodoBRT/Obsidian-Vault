@@ -13,7 +13,7 @@ genres:
   - Adventure
 writer:
   - N/A
-studio: 
+studio:
 episodes: 0
 duration: N/A
 onlineRating: 9
