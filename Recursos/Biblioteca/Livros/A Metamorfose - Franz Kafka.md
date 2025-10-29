@@ -9,6 +9,7 @@ Status: Lido
 Inicio: 2025-01-09
 Termino: 2025-01-15
 Tempo Lendo: 2:30hrs
+cssclasses:
 ---
 ![cover|150](http://books.google.com/books/content?id=cccgEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api)
 

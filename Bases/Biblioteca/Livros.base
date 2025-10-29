@@ -6,7 +6,7 @@ views:
     filters:
       or:
         - file.inFolder("MyVault/Recursos/Biblioteca/Livros")
-        - file.inFolder("Recursos/Biblioteca/Livros")
+        - file.inFolder("cofrinho/Recursos/Biblioteca/Livros")
     order:
       - file.name
       - autor
@@ -14,3 +14,6 @@ views:
       - Termino
     image: note.Cover
     rowHeight: extra
+    cardSize: 230
+    imageFit: contain
+    imageAspectRatio: 1.35
