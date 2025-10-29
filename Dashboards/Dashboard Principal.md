@@ -4,6 +4,105 @@ cssclasses:
 ---
 ##  Desempenho Geral
 
+```chartsview
+type: Line
+data: |
+  dataviewjs:
+    // 1. Pega todas as apostas resolvidas (green/red) com data
+    const pages = dv.pages('#aposta')
+      .where(p => {
+        const dataValida = dv.date(p.data);
+        const resultado = (p.resultado || "").toLowerCase().trim();
+        return dataValida && (resultado === 'green' || resultado === 'red');
+      });
+
+    // 2. Função de cálculo (helper)
+    function calcularLucro(p) {
+        const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+        const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+        const resultado = p.resultado.toLowerCase();
+        if (resultado == 'green') return (valor * odd) - valor;
+        if (resultado == 'red') return -valor;
+        return 0;
+    }
+
+    // 3. Calcula os pontos diários (necessário para o acumulado)
+    const dataPointsDiario = pages
+      .groupBy(p => dv.date(p.data).toISODate())
+      .map(g => ({
+        x: g.key, // Data
+        y: g.rows.map(calcularLucro)
+                 .array()
+                 .reduce((sum, val) => sum + val, 0), // Lucro só daquele dia
+      }))
+      .sort(p => p.x, 'asc');
+
+    // 4. Calcula os pontos ACUMULADOS
+    const dataPointsAcumulado = [];
+    let lucroAcumuladoTotal = 0; // Variável para guardar o total
+
+    for (let pontoDiario of dataPointsDiario.array()) {
+        lucroAcumuladoTotal += pontoDiario.y; // Soma o lucro do dia ao total
+        dataPointsAcumulado.push({
+            x: pontoDiario.x,
+            y: lucroAcumuladoTotal, // Salva o total acumulado
+            group: 'Lucro Acumulado' // Legenda
+        });
+    }
+
+    // 5. Retorna apenas os dados acumulados
+    return dataPointsAcumulado;
+
+options:
+  # Título Principal
+  title:
+    text: 'Desempenho Acumulado'
+    style:
+      fontSize: 20
+      
+  legend:
+    position: 'top-right'
+    
+  xField: 'x'
+  yField: 'y'
+  seriesField: 'group' # O nome aqui será 'Lucro Acumulado'
+
+  # Cor verde
+  color: ['#43cc56']
+  
+  smooth: true
+  
+  # Voltando a área, já que é uma linha só
+  area:
+    style:
+      fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
+      fillOpacity: 0.7
+
+  # Eixo Y (Lucro)
+  yAxis:
+    title:
+      text: 'Lucro (R$)'
+    label:
+      formatter: |
+        function(v) {
+          return v + ' R$';
+        }
+
+  # Eixo X (Data)
+  xAxis:
+    title:
+      text: 'Data'
+  
+  tooltip:
+    # Mostra o R$ formatado
+    formatter: |
+      function(datum) {
+        return {
+          name: datum.group,
+          value: datum.y.toFixed(2) + ' R$'
+        };
+      }
+```
 
 
 ---
@@ -463,105 +562,6 @@ const header = [`TIPSTER (${tipsterCount})`, " ", "LUCRO"];
 dv.table(header, tabela);
 ```
 
-```chartsview
-type: Line
-data: |
-  dataviewjs:
-    // 1. Pega todas as apostas resolvidas (green/red) com data
-    const pages = dv.pages('#aposta')
-      .where(p => {
-        const dataValida = dv.date(p.data);
-        const resultado = (p.resultado || "").toLowerCase().trim();
-        return dataValida && (resultado === 'green' || resultado === 'red');
-      });
-
-    // 2. Função de cálculo (helper)
-    function calcularLucro(p) {
-        const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
-        const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
-        const resultado = p.resultado.toLowerCase();
-        if (resultado == 'green') return (valor * odd) - valor;
-        if (resultado == 'red') return -valor;
-        return 0;
-    }
-
-    // 3. Calcula os pontos diários (necessário para o acumulado)
-    const dataPointsDiario = pages
-      .groupBy(p => dv.date(p.data).toISODate())
-      .map(g => ({
-        x: g.key, // Data
-        y: g.rows.map(calcularLucro)
-                 .array()
-                 .reduce((sum, val) => sum + val, 0), // Lucro só daquele dia
-      }))
-      .sort(p => p.x, 'asc');
-
-    // 4. Calcula os pontos ACUMULADOS
-    const dataPointsAcumulado = [];
-    let lucroAcumuladoTotal = 0; // Variável para guardar o total
-
-    for (let pontoDiario of dataPointsDiario.array()) {
-        lucroAcumuladoTotal += pontoDiario.y; // Soma o lucro do dia ao total
-        dataPointsAcumulado.push({
-            x: pontoDiario.x,
-            y: lucroAcumuladoTotal, // Salva o total acumulado
-            group: 'Lucro Acumulado' // Legenda
-        });
-    }
-
-    // 5. Retorna apenas os dados acumulados
-    return dataPointsAcumulado;
-
-options:
-  # Título Principal
-  title:
-    text: 'Desempenho Acumulado'
-    style:
-      fontSize: 20
-      
-  legend:
-    position: 'top-right'
-    
-  xField: 'x'
-  yField: 'y'
-  seriesField: 'group' # O nome aqui será 'Lucro Acumulado'
-
-  # Cor verde
-  color: ['#43cc56']
-  
-  smooth: true
-  
-  # Voltando a área, já que é uma linha só
-  area:
-    style:
-      fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
-      fillOpacity: 0.7
-
-  # Eixo Y (Lucro)
-  yAxis:
-    title:
-      text: 'Lucro (R$)'
-    label:
-      formatter: |
-        function(v) {
-          return v + ' R$';
-        }
-
-  # Eixo X (Data)
-  xAxis:
-    title:
-      text: 'Data'
-  
-  tooltip:
-    # Mostra o R$ formatado
-    formatter: |
-      function(datum) {
-        return {
-          name: datum.group,
-          value: datum.y.toFixed(2) + ' R$'
-        };
-      }
-```
 
 
 ```chartsview
