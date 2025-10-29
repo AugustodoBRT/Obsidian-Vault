@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2025-10.md",
+                "file": "Dashboards/Dashboard Principal.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-10"
+              "title": "Dashboard Principal"
             }
           }
         ]
@@ -155,6 +155,7 @@
   },
   "active": "607e610cb014dc79",
   "lastOpenFiles": [
+    "2025-10.md",
     "cofrinho/Templates/Apostas.md",
     "cofrinho/Templates",
     "cofrinho",
