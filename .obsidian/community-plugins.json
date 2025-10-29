@@ -1,5 +1,6 @@
 [
   "obsidian-chartsview-plugin",
   "dataview",
-  "templater-obsidian"
+  "templater-obsidian",
+  "quickadd"
 ]

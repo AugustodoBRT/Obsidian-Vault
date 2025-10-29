@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "quickAddVersion": "2.6.0",
+  "createdAt": "2025-10-29T03:07:07.914Z",
+  "rootChoiceIds": [
+    "5ddf4ce2-20fe-438c-a680-30bf61c6a297",
+    "54795eff-d591-4244-a670-558faec96be1"
+  ],
+  "choices": [
+    {
+      "choice": {
+        "id": "5ddf4ce2-20fe-438c-a680-30bf61c6a297",
+        "name": "Apostas",
+        "type": "Macro",
+        "command": true,
+        "runOnStartup": false,
+        "macro": {
+          "name": "Apostas",
+          "id": "05284bdf-182d-446c-bb4f-84297a4859e3",
+          "commands": [
+            {
+              "name": "apostaMacro",
+              "type": "UserScript",
+              "id": "56bce0a9-ced1-48ae-a8b2-002e5280c0f8",
+              "path": "apostaMacro.js",
+              "settings": {}
+            },
+            {
+              "name": "Nova Aposta",
+              "type": "Choice",
+              "id": "ee31731e-636e-46ba-8311-bf5870f4f381",
+              "choiceId": "54795eff-d591-4244-a670-558faec96be1"
+            }
+          ]
+        }
+      },
+      "pathHint": [
+        "Apostas"
+      ],
+      "parentChoiceId": null
+    },
+    {
+      "choice": {
+        "id": "54795eff-d591-4244-a670-558faec96be1",
+        "name": "Nova Aposta",
+        "type": "Template",
+        "command": false,
+        "templatePath": "cofrinho/Templates/Apostas.md",
+        "fileNameFormat": {
+          "enabled": false,
+          "format": ""
+        },
+        "folder": {
+          "enabled": true,
+          "folders": [
+            "Apostas/{{DATE:YYYY}}/{{DATE:MMMM}}"
+          ],
+          "chooseWhenCreatingNote": false,
+          "createInSameFolderAsActiveFile": false,
+          "chooseFromSubfolders": false
+        },
+        "appendLink": false,
+        "openFile": true,
+        "fileOpening": {
+          "location": "tab",
+          "direction": "vertical",
+          "mode": "default",
+          "focus": true
+        },
+        "fileExistsMode": "Increment the file name",
+        "setFileExistsBehavior": false
+      },
+      "pathHint": [
+        "Nova Aposta"
+      ],
+      "parentChoiceId": null
+    }
+  ],
+  "assets": [
+    {
+      "kind": "user-script",
+      "originalPath": "apostaMacro.js",
+      "contentEncoding": "base64",
+      "content": "bW9kdWxlLmV4cG9ydHMgPSBhc3luYyAocGFyYW1zKSA9PiB7CiAgY29uc3QgeyBxdWlja0FkZEFwaSwgdmFyaWFibGVzIH0gPSBwYXJhbXM7CgogIC8vIC0tLSAxLiBDT05GSUdVUkHDh8ODTyAtLS0KICAvLyBEZWZpbmEgc3VhIGJhbmNhIGluaWNpYWwgYXF1aQogIGNvbnN0IGJhbmNhSW5pY2lhbCA9IDEwMDA7CiAgLy8gLS0tIEZJTSBEQSBDT05GSUdVUkHDh8ODTyAtLS0KCgogIC8vIC0tLSAyLiBQZXJndW50YXMgQ29tdW5zIChFc3BvcnRlLCBPZGQsIGV0YykgLS0tCiAgdmFyaWFibGVzLmVzcG9ydGUgPSBhd2FpdCBxdWlja0FkZEFwaS5pbnB1dFByb21wdCgiRXNwb3J0ZSAoZnV0ZWJvbCwgZXRjKSIpOwogIHZhcmlhYmxlcy5kYXRhID0gbmV3IERhdGUoKS50b0lTT1N0cmluZygpLnNsaWNlKDAsIDEwKTsgLy8gRGF0YSBhdXRvbcOhdGljYQogIHZhcmlhYmxlcy5vZGQgPSBOdW1iZXIoYXdhaXQgcXVpY2tBZGRBcGkuaW5wdXRQcm9tcHQoIk9kZCIpKTsKICB2YXJpYWJsZXMuY2FzYSA9IGF3YWl0IHF1aWNrQWRkQXBpLmlucHV0UHJvbXB0KCJDYXNhIGRlIEFwb3N0YXMiKTsKICB2YXJpYWJsZXMudGlwc3RlciA9IGF3YWl0IHF1aWNrQWRkQXBpLmlucHV0UHJvbXB0KCJUaXBzdGVyIik7CgogIAogIC8vIC0tLSAzLiBDw4FMQ1VMTyBETyBTVEFLRSAoVmFsb3IgdnMgUG9yY2VudGFnZW0pIC0tLQogIGNvbnN0IG1ldG9kb1N0YWtlID0gYXdhaXQgcXVpY2tBZGRBcGkuc3VnZ2VzdGVyKAogICAgICBbIlBvciBWYWxvciBGaXhvIChSJCkiLCAiUG9yIFBvcmNlbnRhZ2VtIGRhIEJhbmNhICglKSJdLAogICAgICBbInZhbG9yIiwgInBvcmNlbnRhZ2VtIl0KICApOwoKICBpZiAobWV0b2RvU3Rha2UgPT09ICJ2YWxvciIpIHsKICAgICAgLy8gVXN1w6FyaW8gZXNjb2xoZXUgIlBvciBWYWxvciBGaXhvIgogICAgICB2YXJpYWJsZXMudmFsb3IgPSBOdW1iZXIoYXdhaXQgcXVpY2tBZGRBcGkuaW5wdXRQcm9tcHQoIlZhbG9yIEFwb3N0YWRvIChSJCkiKSk7CiAgICAgIAogICAgICAvLyBTY3JpcHQgY2FsY3VsYSBhIHBvcmNlbnRhZ2VtCiAgICAgIHZhcmlhYmxlcy5wb3JjZW50YWdlbSA9ICgodmFyaWFibGVzLnZhbG9yIC8gYmFuY2FJbmljaWFsKSAqIDEwMCkudG9GaXhlZCgyKSArICIlIjsKICAKICB9IGVsc2UgewogICAgICAvLyBVc3XDoXJpbyBlc2NvbGhldSAiUG9yIFBvcmNlbnRhZ2VtIgogICAgICBjb25zdCBpbnB1dFBvcmMgPSBOdW1iZXIoYXdhaXQgcXVpY2tBZGRBcGkuaW5wdXRQcm9tcHQoIiUgZGEgQmFuY2EgKGV4OiAyIHBhcmEgMiUpIikpOwogICAgICAKICAgICAgLy8gU2NyaXB0IGNhbGN1bGEgbyB2YWxvcgogICAgICB2YXJpYWJsZXMudmFsb3IgPSAoaW5wdXRQb3JjIC8gMTAwKSAqIGJhbmNhSW5pY2lhbDsKICAgICAgCiAgICAgIHZhcmlhYmxlcy5wb3JjZW50YWdlbSA9IGlucHV0UG9yYy50b1N0cmluZygpICsgIiUiOwogIH0KCgogIC8vIC0tLSA0LiBSZXN1bHRhZG8gZSBDw6FsY3VsbyBkbyBMdWNybyAtLS0KICB2YXJpYWJsZXMucmVzdWx0YWRvID0gYXdhaXQgcXVpY2tBZGRBcGkuc3VnZ2VzdGVyKAogICAgICBbImdyZWVuIiwgInJlZCIsICJwZW5kZW50ZSJdLAogICAgICBbImdyZWVuIiwgInJlZCIsICJwZW5kZW50ZSJdCiAgKTsKCiAgLy8gQ2FsY3VsYSBsdWNybyAoYWdvcmEgdXNhIG8gdmFyaWFibGVzLnZhbG9yIHF1ZSBmb2kgY2FsY3VsYWRvIGF1dG9tYXRpY2FtZW50ZSkKICBpZiAodmFyaWFibGVzLnJlc3VsdGFkbyA9PSAiZ3JlZW4iKSB7CiAgICB2YXJpYWJsZXMubHVjcm8gPSAodmFyaWFibGVzLnZhbG9yICogKHZhcmlhYmxlcy5vZGQgLSAxKSkudG9GaXhlZCgyKTsKICB9IGVsc2UgaWYgKHZhcmlhYmxlcy5yZXN1bHRhZG8gPT0gInJlZCIpIHsKICAgIHZhcmlhYmxlcy5sdWNybyA9ICgtdmFyaWFibGVzLnZhbG9yKS50b0ZpeGVkKDIpOwogIH0gZWxzZSB7CiAgICB2YXJpYWJsZXMubHVjcm8gPSAiMC4wMCI7CiAgfQoKICAvLyBPIFF1aWNrQWRkIHZhaSBhdXRvbWF0aWNhbWVudGUgcGFzc2FyIHRvZGFzIGFzICd2YXJpYWJsZXMnICh2YWxvciwgcG9yY2VudGFnZW0sIGx1Y3JvKQogIC8vIHBhcmEgbyBzZXUgdGVtcGxhdGUsIHF1ZSBqw6EgZXN0w6EgY29uZmlndXJhZG8gY29tIHt7VkFMVUU6dmFsb3J9fSwgZXRjLgp9Cg=="
+    },
+    {
+      "kind": "template",
+      "originalPath": "cofrinho/Templates/Apostas.md",
+      "contentEncoding": "base64",
+      "content": "LS0tCnRhZ3M6CiAgLSBhcG9zdGEKZXNwb3J0ZTogInt7VkFMVUU6ZXNwb3J0ZX19IgpkYXRhOiAie3tWQUxVRTpkYXRhfX0iCm9kZDogInt7VkFMVUU6b2RkfX0iCnZhbG9yX2Fwb3N0YWRvOiAie3tWQUxVRTp2YWxvcn19Igpwb3JjZW50YWdlbV9kYV9hcG9zdGE6ICJ7e1ZBTFVFOnBvcmNlbnRhZ2VtfX0iCnJlc3VsdGFkbzogInt7VkFMVUU6cmVzdWx0YWRvfX0iCmx1Y3JvOiAie3tWQUxVRTpsdWNyb319IgpjYXNhOiAie3tWQUxVRTpjYXNhfX0iCnRpcHN0ZXI6ICJ7e1ZBTFVFOnRpcHN0ZXJ9fSIKLS0tCg=="
+    }
+  ]
+}
