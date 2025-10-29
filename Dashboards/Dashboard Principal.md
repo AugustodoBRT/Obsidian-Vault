@@ -542,266 +542,203 @@ dv.table(header, tabela);
 ```
 
 ```chartsview
-type: view
-layout:
-  type: 'cols' # 'cols' para lado a lado, 'rows' para um em cima do outro
-views:
-  - type: 'line' # Seu primeiro gráfico
-    title:
-      text: 'Gráfico de Linha'
-    data: |
-      dataviewjs:
-        return [
-          { x: 'Jan', y: 10 },
-          { x: 'Fev', y: 20 },
-        ];
-    options:
-      xField: 'x'
-      yField: 'y'
+type: Line
+data: |
+  dataviewjs:
+    // 1. Pega todas as apostas resolvidas (green/red) com data
+    const pages = dv.pages('#aposta')
+      .where(p => {
+        const dataValida = dv.date(p.data);
+        const resultado = (p.resultado || "").toLowerCase().trim();
+        return dataValida && (resultado === 'green' || resultado === 'red');
+      });
+
+    // 2. Função de cálculo (helper)
+    function calcularLucro(p) {
+        const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+        const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+        const resultado = p.resultado.toLowerCase();
+        if (resultado == 'green') return (valor * odd) - valor;
+        if (resultado == 'red') return -valor;
+        return 0;
+    }
+
+    // 3. Calcula os pontos diários (necessário para o acumulado)
+    const dataPointsDiario = pages
+      .groupBy(p => dv.date(p.data).toISODate())
+      .map(g => ({
+        x: g.key, // Data
+        y: g.rows.map(calcularLucro)
+                 .array()
+                 .reduce((sum, val) => sum + val, 0), // Lucro só daquele dia
+      }))
+      .sort(p => p.x, 'asc');
+
+    // 4. Calcula os pontos ACUMULADOS
+    const dataPointsAcumulado = [];
+    let lucroAcumuladoTotal = 0; // Variável para guardar o total
+
+    for (let pontoDiario of dataPointsDiario.array()) {
+        lucroAcumuladoTotal += pontoDiario.y; // Soma o lucro do dia ao total
+        dataPointsAcumulado.push({
+            x: pontoDiario.x,
+            y: lucroAcumuladoTotal, // Salva o total acumulado
+            group: 'Lucro Acumulado' // Legenda
+        });
+    }
+
+    // 5. Retorna apenas os dados acumulados
+    return dataPointsAcumulado;
+
+options:
+  # Título Principal
+  title:
+    text: 'Desempenho Acumulado'
+    style:
+      fontSize: 20
       
-  - type: 'pie' # Seu segundo gráfico
+  legend:
+    position: 'top-right'
+    
+  xField: 'x'
+  yField: 'y'
+  seriesField: 'group' # O nome aqui será 'Lucro Acumulado'
+
+  # Cor verde
+  color: ['#43cc56']
+  
+  smooth: true
+  
+  # Voltando a área, já que é uma linha só
+  area:
+    style:
+      fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
+      fillOpacity: 0.7
+
+  # Eixo Y (Lucro)
+  yAxis:
     title:
-      text: 'Gráfico de Pizza'
-    data: |
-      dataviewjs:
-        return [
-          { name: 'Tipo A', value: 40 },
-          { name: 'Tipo B', value: 60 },
-        ];
-    options:
-      angleField: 'value'
-      colorField: 'name'
+      text: 'Lucro (R$)'
+    label:
+      formatter: |
+        function(v) {
+          return v + ' R$';
+        }
+
+  # Eixo X (Data)
+  xAxis:
+    title:
+      text: 'Data'
+  
+  tooltip:
+    # Mostra o R$ formatado
+    formatter: |
+      function(datum) {
+        return {
+          name: datum.group,
+          value: datum.y.toFixed(2) + ' R$'
+        };
+      }
 ```
 
 
 ```chartsview
-type: view
-layout:
-  type: 'tabs' # Isso cria as abas
-views:
-  # --- Aba 1: Gráfico de Linha ---
-  - type: 'line'
-    data: |
-      dataviewjs:
-        const dataPoints = dv.pages('#aposta')
-          .where(p => {
-            const dataValida = dv.date(p.data);
-            const resultado = (p.resultado || "").toLowerCase().trim();
-            return dataValida && (resultado === 'green' || resultado === 'red');
-          })
-          .groupBy(p => dv.date(p.data).toISODate())
-          .map(g => ({
-            x: g.key,
-            y: g.rows.map(p => {
-              const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
-              const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
-              const resultado = p.resultado.toLowerCase();
-              if (resultado == 'green') {
-                return (valor * odd) - valor;
-              } else if (resultado == 'red') {
-                return -valor;
-              }
-              return 0;
-            }).array()
-            .reduce((sum, val) => sum + val, 0),
-            group: 'Lucro Diário'
-          }))
-          .sort(p => p.x, 'asc');
-        return dataPoints.array();
-    options:
-      title:
-        text: 'Desempenho Diário'
-      legend:
-        position: 'top-right'
-      xField: 'x'
-      yField: 'y'
-      seriesField: 'group'
-      color: ['#43cc56']
-      smooth: true
-      area:
-        style:
-          fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
-          fillOpacity: 0.7
-      yAxis:
-        title:
-          text: 'Lucro (R$)'
-        label:
-          formatter: |
-            function(v) {
-              return v + ' R$';
-            }
-      xAxis:
-        title:
-          text: 'Data'
-      tooltip:
-        formatter: |
-          function(datum) {
-            return {
-              name: datum.group,
-              value: datum.y.toFixed(2) + ' R$'
-            };
-          }
+type: Line
+data: |
+  dataviewjs:
+    // 1. Pega todas as apostas resolvidas (green/red) com data
+    const pages = dv.pages('#aposta')
+      .where(p => {
+        const dataValida = dv.date(p.data);
+        const resultado = (p.resultado || "").toLowerCase().trim();
+        return dataValida && (resultado === 'green' || resultado === 'red');
+      });
 
-  # --- Aba 2: Gráfico de Pizza ---
-  - type: 'pie'
-    data: |
-      dataviewjs:
-        const pages_pie = dv.pages('#aposta');
-        const counts = { green: 0, red: 0, pendente: 0 };
-        for (let p of pages_pie) {
-          if (p.resultado && typeof p.resultado === 'string') {
-            let r = p.resultado.toLowerCase().trim();
-            if (r === 'green') {
-              counts.green++;
-            } else if (r === 'red') {
-              counts.red++;
-            } else if (r === 'pendente') {
-              counts.pendente++;
-            }
-          }
+    // 2. Função de cálculo (helper)
+    function calcularLucro(p) {
+        const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+        const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+        const resultado = p.resultado.toLowerCase();
+        if (resultado == 'green') return (valor * odd) - valor;
+        if (resultado == 'red') return -valor;
+        return 0;
+    }
+
+    // 3. Calcula os pontos diários (Série 1)
+    const dataPointsDiario = pages
+      .groupBy(p => dv.date(p.data).toISODate())
+      .map(g => ({
+        x: g.key, // Data
+        y: g.rows.map(calcularLucro)
+                 .array()
+                 .reduce((sum, val) => sum + val, 0), // Lucro só daquele dia
+        group: 'Lucro Diário' // Legenda 1
+      }))
+      .sort(p => p.x, 'asc');
+
+    // 4. Calcula os pontos ACUMULADOS (Série 2)
+    const dataPointsAcumulado = [];
+    let lucroAcumuladoTotal = 0; // Variável para guardar o total
+
+    for (let pontoDiario of dataPointsDiario.array()) {
+        lucroAcumuladoTotal += pontoDiario.y; // Soma o lucro do dia ao total
+        dataPointsAcumulado.push({
+            x: pontoDiario.x,
+            y: lucroAcumuladoTotal, // Salva o total acumulado
+            group: 'Lucro Acumulado' // Legenda 2
+        });
+    }
+
+    // 5. Combina as duas séries de dados em um array só
+    const finalData = dataPointsDiario.array().concat(dataPointsAcumulado);
+    return finalData;
+
+options:
+  # Título Principal
+  title:
+    text: 'Desempenho Geral'
+    style:
+      fontSize: 20
+      
+  legend:
+    position: 'top-right'
+    
+  xField: 'x'
+  yField: 'y'
+  seriesField: 'group' # Diz ao gráfico para criar duas linhas baseadas no 'group'
+
+  # --- MUDANÇA AQUI ---
+  # Define as cores para as 2 linhas:
+  # 1. 'Lucro Diário' (Verde)
+  # 2. 'Lucro Acumulado' (Azul)
+  color: ['#43cc56', '#61afef']
+  
+  smooth: true
+  
+  # A opção 'area' foi removida, pois fica confusa com 2 linhas
+  
+  # Eixo Y (Lucro)
+  yAxis:
+    title:
+      text: 'Lucro (R$)'
+    label:
+      formatter: |
+        function(v) {
+          return v + ' R$';
         }
-        return [
-          { name: "green", value: counts.green },
-          { name: "red", value: counts.red },
-          { name: "pendente", value: counts.pendente }
-        ];
-    options:
-      title:
-        text: 'Resultados (Pizza)'
-      angleField: 'value'
-      colorField: 'name'
-      color:
-        - '#43cc56'
-        - '#ff2626'
-        - '#b0b0b0'
-      radius: 0.8
-      label:
-        type: 'outer'
-        style:
-          fill: '#fff'
-        content: '{name} {percentage}'
-      legend:
-        marker:
-          symbol: 'circle'
-          style:
-            r: 8
-      interactions:
-        - type: 'element-active'
+
+  # Eixo X (Data)
+  xAxis:
+    title:
+      text: 'Data'
+  
+  tooltip:
+    # Mostra o R$ formatado
+    formatter: |
+      function(datum) {
+        return {
+          name: datum.group,
+          value: datum.y.toFixed(2) + ' R$'
+        };
+      }
 ```
-
-
-> [!multi-column]
->
-> > [!info]+ Desempenho Diário
-> > ```chartsview
-> > type: Line
-> > data: |
-> >   dataviewjs:
-> >     const dataPoints = dv.pages('#aposta')
-> >       .where(p => {
-> >         const dataValida = dv.date(p.data);
-> >         const resultado = (p.resultado || "").toLowerCase().trim();
-> >         return dataValida && (resultado === 'green' || resultado === 'red');
-> >       })
-> >       .groupBy(p => dv.date(p.data).toISODate())
-> >       .map(g => ({
-> >         x: g.key,
-> >         y: g.rows.map(p => {
-> >           const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
-> >           const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
-> >           const resultado = p.resultado.toLowerCase();
-> >           if (resultado == 'green') {
-> >             return (valor * odd) - valor;
-> >           } else if (resultado == 'red') {
-> >             return -valor;
-> >           }
-> >           return 0;
-> >         }).array()
-> >         .reduce((sum, val) => sum + val, 0),
-> >         group: 'Lucro Diário'
-> >       }))
-> >       .sort(p => p.x, 'asc');
-> >     return dataPoints.array();
-> > options:
-> >   title:
-> >     text: 'Desempenho Diário'
-> >   legend:
-> >     position: 'top-right'
-> >   xField: 'x'
-> >   yField: 'y'
-> >   seriesField: 'group'
-> >   color: ['#43cc56']
-> >   smooth: true
-> >   area:
-> >     style:
-> >       fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
-> >       fillOpacity: 0.7
-> >   yAxis:
-> >     title:
-> >       text: 'Lucro (R$)'
-> >     label:
-> >       formatter: |
-> >         function(v) {
-> >           return v + ' R$';
-> >         }
-> >   xAxis:
-> >     title:
-> >       text: 'Data'
-> >   tooltip:
-> >     formatter: |
-> >       function(datum) {
-> >         return {
-> >           name: datum.group,
-> >           value: datum.y.toFixed(2) + ' R$'
-> >         };
-> >       }
-> > ```
->
-> > [!info]+ Resultados (Pizza)
-> > ```chartsview
-> > type: Pie
-> > data: |
-> >   dataviewjs:
-> >     const pages_pie = dv.pages('#aposta');
-> >     const counts = { green: 0, red: 0, pendente: 0 };
-> >     for (let p of pages_pie) {
-> >       if (p.resultado && typeof p.resultado === 'string') {
-> >         let r = p.resultado.toLowerCase().trim();
-> >         if (r === 'green') {
-> >           counts.green++;
-> >         } else if (r === 'red') {
-> >           counts.red++;
-> >         } else if (r === 'pendente') {
-> >           counts.pendente++;
-> >         }
-> >       }
-> >     }
-> >     return [
-> >       { name: "green", value: counts.green },
-> >       { name: "red", value: counts.red },
-> >       { name: "pendente", value: counts.pendente }
-> >     ];
-> > options:
-> >   title:
-> >     text: 'Resultados (Pizza)'
-> >   angleField: 'value'
-> >   colorField: 'name'
-> >   color:
-> >     - '#43cc56'
-> >     - '#ff2626'
-> >     - '#b0b0b0'
-> >   radius: 0.8
-> >   label:
-> >     type: 'outer'
-> >     style:
-> >       fill: '#fff'
-> >     content: '{name} {percentage}'
-> >   legend:
-> >     marker:
-> >       symbol: 'circle'
-> >       style:
-> >         r: 8
-> >   interactions:
-> >     - type: 'element-active'
-> > ```
-

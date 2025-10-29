@@ -2,7 +2,7 @@
 tags:
   - aposta
 esporte: futebol americano
-data: 2025-10-27
+data: 2025-11-25
 odd: "2"
 valor_apostado: "18.4"
 porcentagem_da_aposta: 1.84%
