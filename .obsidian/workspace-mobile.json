@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Dashboards/Dashboard Principal.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -98,6 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
+            "file": "Dashboards/Dashboard Principal.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -148,9 +149,13 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "templater-obsidian:Templater": false
     }
   },
   "active": "607e610cb014dc79",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Dashboards/Graficos.md",
+    "Dashboards/Dashboard Principal.md"
+  ]
 }
