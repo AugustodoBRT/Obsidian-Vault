@@ -39,10 +39,14 @@
             "id": "359a2be088cadb9f",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Apostas/2025/outubro/Sim - mais de 3.5 - ambas equipes marcam - total de gols maismenos.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nova aba"
+              "title": "Sim - mais de 3.5 - ambas equipes marcam - total de gols maismenos"
             }
           }
         ],
@@ -178,7 +182,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "45bbf850c985d125",
+  "active": "359a2be088cadb9f",
   "lastOpenFiles": [
     "Apostas/2025/outubro/Sim - mais de 3.5 - ambas equipes marcam - total de gols maismenos.md",
     "Apostas/2025/outubro/mahomes 250+ jardas e 2+ td de passe.md",
