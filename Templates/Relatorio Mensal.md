@@ -1,8 +1,12 @@
 ---
-# PREENCHA O CAMPO ABAIXO COM O MÊS DESEJADO (ex: 2025-10)
 mes_relatorio: 
+tipo: relatorio-mensal
+resumo_lucro: 0
+resumo_investido: 0
+resumo_apostas: 0
+resumo_acertos: 0
+resumo_odd_soma: 0
 ---
-
 ### 💰 Lucro/Perda no Mês
 
 ```dataviewjs
