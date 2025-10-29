@@ -1,5 +1,62 @@
 {
-  "choices": [],
+  "choices": [
+    {
+      "id": "5ddf4ce2-20fe-438c-a680-30bf61c6a297",
+      "name": "Apostas",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Apostas",
+        "id": "05284bdf-182d-446c-bb4f-84297a4859e3",
+        "commands": [
+          {
+            "name": "apostaMacro",
+            "type": "UserScript",
+            "id": "56bce0a9-ced1-48ae-a8b2-002e5280c0f8",
+            "path": "apostaMacro.js",
+            "settings": {}
+          },
+          {
+            "name": "Nova Aposta",
+            "type": "Choice",
+            "id": "ee31731e-636e-46ba-8311-bf5870f4f381",
+            "choiceId": "54795eff-d591-4244-a670-558faec96be1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "54795eff-d591-4244-a670-558faec96be1",
+      "name": "Nova Aposta",
+      "type": "Template",
+      "command": false,
+      "templatePath": "cofrinho/Templates/Apostas.md",
+      "fileNameFormat": {
+        "enabled": false,
+        "format": ""
+      },
+      "folder": {
+        "enabled": true,
+        "folders": [
+          "Apostas/{{DATE:YYYY}}/{{DATE:MMMM}}"
+        ],
+        "chooseWhenCreatingNote": false,
+        "createInSameFolderAsActiveFile": false,
+        "chooseFromSubfolders": false
+      },
+      "appendLink": false,
+      "openFile": true,
+      "fileOpening": {
+        "location": "tab",
+        "direction": "vertical",
+        "mode": "default",
+        "focus": true
+      },
+      "fileExistsMode": "Increment the file name",
+      "setFileExistsBehavior": false
+    }
+  ],
   "inputPrompt": "single-line",
   "devMode": false,
   "templateFolderPath": "",
