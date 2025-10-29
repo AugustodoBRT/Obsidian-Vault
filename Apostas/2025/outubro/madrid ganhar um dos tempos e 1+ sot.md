@@ -9,5 +9,5 @@ porcentagem_da_aposta: 2.32%
 resultado: green
 lucro: "58.00"
 casa: bet365
-tipster: peixe
+tipster: pei
 ---

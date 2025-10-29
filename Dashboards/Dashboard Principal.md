@@ -8,24 +8,31 @@ cssclasses:
 type: Line
 data: |
   dataviewjs:
-
-  const dataPoints = dv.pages('#aposta')
-   
-    // Checa se p.data é uma data VÁLIDA que o dataview entende
-    .where(p => dv.date(p.data) && p.lucro !== undefined) 
-  
-    .groupBy(p => dv.date(p.data).toISODate()) 
-    .map(g => ({
-      x: g.key, // Eixo X: a data
-      y: g.rows.map(p => Number(p.lucro) || 0)
-            .array()
-            .reduce((sum, val) => sum + val, 0),
-      group: 'Lucro Diário'
-    }))
-    .sort(p => p.x, 'asc');
-    
- 
-  return dataPoints.array();
+    const dataPoints = dv.pages('#aposta')
+      .where(p => {
+        const dataValida = dv.date(p.data);
+        const resultado = (p.resultado || "").toLowerCase().trim();
+        return dataValida && (resultado === 'green' || resultado === 'red');
+      })
+      .groupBy(p => dv.date(p.data).toISODate())
+      .map(g => ({
+        x: g.key,
+        y: g.rows.map(p => {
+          const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+          const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+          const resultado = p.resultado.toLowerCase();
+          if (resultado == 'green') {
+            return (valor * odd) - valor;
+          } else if (resultado == 'red') {
+            return -valor;
+          }
+          return 0;
+        }).array()
+        .reduce((sum, val) => sum + val, 0),
+        group: 'Lucro Diário'
+      }))
+      .sort(p => p.x, 'asc');
+    return dataPoints.array();
 options:
   # Título Principal
   title:
@@ -33,7 +40,6 @@ options:
     style:
       fontSize: 20
       
-  
   legend:
     position: 'top-right'
     
@@ -43,10 +49,8 @@ options:
 
   color: ['#43cc56']
   
- 
   smooth: true
   
- 
   area:
     style:
       fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
@@ -57,7 +61,7 @@ options:
     title:
       text: 'Lucro (R$)'
     label:
-    
+      
       # Sintaxe de função "segura"
       formatter: |
         function(v) {
@@ -68,10 +72,8 @@ options:
   xAxis:
     title:
       text: 'Data'
-
- 
+  
   tooltip:
-    # --- CORREÇÃO AQUI ---
     # Sintaxe de função "segura"
     formatter: |
       function(datum) {
@@ -122,10 +124,20 @@ options:
 > > });
 > > 
 > > // --- 3. Card Progressão (% Banca) ---
-> > // Cálculo de Lucro (necessário para este card)
-> > const lucroTotal_col1 = pages_col1.map(p => Number(p.lucro) || 0)
-> >                                 .array()
-> >                                 .reduce((sum, val) => sum + val, 0);
+> > // --- MUDANÇA AQUI: Cálculo de Lucro dinâmico ---
+> > const lucroTotal_col1 = pages_col1.map(p => {
+> >     const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+> >     const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+> >     const resultado = p.resultado.toLowerCase();
+> >     
+> >     if (resultado == 'green') {
+> >         return (valor * odd) - valor;
+> >     } else if (resultado == 'red') {
+> >         return -valor;
+> >     }
+> >     return 0;
+> > }).array().reduce((sum, val) => sum + val, 0);
+> > // --- FIM DA MUDANÇA ---
 > > 
 > > const progressao = (bancaInicial === 0) ? 0 : (lucroTotal_col1 / bancaInicial) * 100;
 > > const corProgressao = (progressao >= 0) ? '#43cc56' : '#f04134';
@@ -153,14 +165,25 @@ options:
 > >   .where(p => p.resultado == "green" || p.resultado == "red");
 > > 
 > > // --- Cálculos necessários ---
-> > const lucroTotal_col2 = pages_col2.map(p => Number(p.lucro) || 0)
-> >                                 .array()
-> >                                 .reduce((sum, val) => sum + val, 0);
+> > // --- MUDANÇA AQUI: Cálculo de Lucro dinâmico ---
+> > const lucroTotal_col2 = pages_col2.map(p => {
+> >     const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+> >     const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+> >     const resultado = p.resultado.toLowerCase();
+> >     
+> >     if (resultado == 'green') {
+> >         return (valor * odd) - valor;
+> >     } else if (resultado == 'red') {
+> >         return -valor;
+> >     }
+> >     return 0;
+> > }).array().reduce((sum, val) => sum + val, 0);
+> > // --- FIM DA MUDANÇA ---
 > > 
 > > const investTotal_col2 = pages_col2.map(p => Number(p.valor_apostado) || 0)
-> >                                  .array()
-> >                                  .reduce((sum, val) => sum + val, 0);
-> >                                           
+> >                                     .array()
+> >                                     .reduce((sum, val) => sum + val, 0);
+> >                                     
 > > const roi_col2 = (investTotal_col2 === 0) ? 0 : (lucroTotal_col2 / investTotal_col2) * 100;
 > > const bancaTotal = bancaInicial + lucroTotal_col2;
 > > 
@@ -313,99 +336,472 @@ options:
 
 ```dataviewjs
 function createStat(label, value, color = "#ffffff") {
-    return dv.el('div', [
-        dv.el('span', `${label}: `, { 
-            attr: { style: 'font-size: 12px; color: #a0a0a0; text-transform: uppercase; margin: 0; padding: 0; font-weight: 600;' }
-        }),
-        dv.el('span', value, { 
-            attr: { style: `font-size: 14px; font-weight: 600; color: ${color}; margin: 0; padding: 0;` }
-        })
-    ], { 
-        attr: { style: 'text-align: left; margin: 0 0 0 16px; padding: 0; white-space: nowrap; flex-shrink: 0' }
-    });
+    return dv.el('div', [
+        dv.el('span', `${label}: `, { 
+            attr: { style: 'font-size: 12px; color: #a0a0a0; text-transform: uppercase; margin: 0; padding: 0; font-weight: 600;' }
+        }),
+        dv.el('span', value, { 
+            attr: { style: `font-size: 14px; font-weight: 600; color: ${color}; margin: 0; padding: 0;` }
+        })
+    ], { 
+        attr: { style: 'text-align: left; margin: 0 0 0 16px; padding: 0; white-space: nowrap; flex-shrink: 0' }
+    });
 }
 function createBadge(text, bgColor = "#333", textColor = "#fff") {
-    if (!text) return dv.el('span', '');
-    return dv.el('span', text, {
-        attr: { style: `font-size: 12px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background-color: ${bgColor}; color: ${textColor}; white-space: nowrap; flex-shrink: 0;` }
-    });
+    if (!text) return dv.el('span', '');
+    return dv.el('span', text, {
+        attr: { style: `font-size: 12px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background-color: ${bgColor}; color: ${textColor}; white-space: nowrap; flex-shrink: 0;` }
+    });
 }
 
-// Coleta e filtra as notas do mês atual com campo de data válido e resultado definido:
+// Coleta e filtra as notas do mês atual com campo de data válido
 const pages = dv.pages('#aposta')
-    .where(p => {
-        const dataValida = dv.date(p.data);
-        if (!p.resultado || !dataValida) return false;
-        return dataValida.month == dv.date("now").month && dataValida.year == dv.date("now").year;
-    })
-    .sort(p => p.file.ctime, 'desc'); // Última nota criada primeiro
+    .where(p => {
+        const dataValida = dv.date(p.data);
+        if (!dataValida) return false;
+        return dataValida.month == dv.date("now").month && dataValida.year == dv.date("now").year;
+    })
+    .sort(p => p.file.ctime, 'desc'); // Última nota criada primeiro
 
 for (let page of pages) {
-    const odd_num = Number((page.odd || '0').toString().replace(",", ".")) || 0;
-    const valor = Number((page.valor_apostado || '0').toString().replace(",", ".")) || 0;
-    const lucro = Number((page.lucro || '0').toString().replace(",", ".")) || 0;
-    const casa = (typeof page.casa === "string" ? page.casa.trim() : "N/A");
-    const esporte = (typeof page.esporte === "string" ? page.esporte.trim() : "Aposta");
-    const ganho = valor + lucro;
-
-    // Cores
-    const corGreen = "#43cc56";
-    const corRed = "#f04134";
-    const corGrey = "#a0a0a0";
-    let corLucro = corGrey, corGanho = corGrey;
-    if (page.resultado == 'green') corLucro = corGanho = corGreen;
-    if (page.resultado == 'red') {
-        corLucro = corRed;
-        corGanho = (ganho > 0) ? corGreen : corRed; 
+    const odd_num = Number((page.odd || '0').toString().replace(",", ".")) || 0;
+    const valor = Number((page.valor_apostado || '0').toString().replace(",", ".")) || 0;
+    
+    const resultado = (page.resultado || 'pendente').toLowerCase().trim();
+    let lucro = 0;
+    if (resultado == 'green') {
+        lucro = (valor * odd_num) - valor;
+    } else if (resultado == 'red') {
+        lucro = -valor;
     }
-    if (lucro == 0) corLucro = corGrey;
 
-    const coresCasas = {
-        "stake":         { bg: "#000000", text: "#ffffff" },
-        "betano":        { bg: "#d45c00", text: "#ffffff" },
-        "superbet":      { bg: "#E60000", text: "#ffffff" },
-        "bet365":        { bg: "#04a367", text: "#ffffff" },
-        "betpix365":     { bg: "#FBC02D", text: "#000000" },
-        "betnacional":   { bg: "#007bff", text: "#ffffff" },
-        "esportes da sorte": { bg: "#003B73", text: "#ffffff" }
-    };
-    const coresEsportes = {
-        "futebol":    { bg: "#1f78b4", text: "#ffffff" },
-        "basquete":   { bg: "#401c00", text: "#ffffff" },
-        "tenis":      { bg: "#6a3d9a", text: "#ffffff" },
-        "esports":    { bg: "#e31a1c", text: "#ffffff" }
-    };
-    const corCasaPadrao = { bg: "#333", text: "#fff" };
-    const corEsportePadrao = { bg: "#444", text: "#fff" };
+    const casa = (typeof page.casa === "string" ? page.casa.trim() : "N/A");
+    const esporte = (typeof page.esporte === "string" ? page.esporte.trim() : "Aposta");
+    const ganho = valor + lucro;
 
-    const corCasaObj = coresCasas[casa.toLowerCase()] || corCasaPadrao;
-    const corEsporteObj = coresEsportes[esporte.toLowerCase()] || corEsportePadrao;
+    // Cores
+    const corGreen = "#43cc56";
+    const corRed = "#f04134";
+    const corGrey = "#a0a0a0";
+    
+    // --- NOVAS CORES ---
+    const corOdd = "#e6c07b"; // Amarelo suave
+    const corValor = "#61afef"; // Azul claro
 
-    // Card
-    const card = dv.el('div', '', {
-        attr: { 
-            style: 'display: flex; flex-direction: row; align-items: center; padding: 14px 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 8px; border: 1px solid #333; list-style: none; overflow-x: auto; white-space: nowrap;'
-        }
-    });
-    // Badges
-    const badges = dv.el('div', [
-        createBadge(casa, corCasaObj.bg, corCasaObj.text),
-        createBadge(esporte, corEsporteObj.bg, corEsporteObj.text)
-    ], { attr: { style: 'display: flex; flex-direction: row; margin: 0; padding: 0; gap: 6px; flex-shrink: 0;' } });
-    card.appendChild(badges);
-    // Título (clique abre a nota)
-    const title = dv.el('div', dv.fileLink(page.file.path, false, page.file.name), {
-        attr: { style: 'font-size: 16px; font-weight: 600; color: #fff; margin: 0 0 0 14px; padding: 0; line-height: 1.3; flex-shrink: 0;' } 
-    });
-    card.appendChild(title);
-    // Stats
-    card.appendChild(createStat("Cotação", odd_num.toFixed(3), corGrey));
-    card.appendChild(createStat("Valor", `${valor.toFixed(2)} R$`, corGrey));
-    card.appendChild(createStat("Lucro", `${lucro.toFixed(2)} R$`, corLucro));
-    card.appendChild(createStat("Total", `${ganho.toFixed(2)} R$`, corGanho));
+    let corLucro = corGrey, corGanho = corGrey;
+    if (resultado == 'green') corLucro = corGanho = corGreen;
+    if (resultado == 'red') {
+        corLucro = corRed;
+        corGanho = (ganho > 0) ? corGreen : corRed; // <--- LINHA CORRIGIDA
+    }
+    if (lucro == 0) corLucro = corGrey;
+
+    const coresCasas = {
+        "stake":         { bg: "#000000", text: "#ffffff" },
+        "betano":        { bg: "#d45c00", text: "#ffffff" },
+        "superbet":      { bg: "#E60000", text: "#ffffff" },
+        "bet365":        { bg: "#04a367", text: "#ffffff" },
+        "betpix365":     { bg: "#FBC02D", text: "#000000" },
+        "betnacional":   { bg: "#007bff", text: "#ffffff" },
+        "esportes da sorte": { bg: "#003B73", text: "#ffffff" }
+    };
+    const coresEsportes = {
+        "futebol":    { bg: "#1f78b4", text: "#ffffff" },
+        "basquete":   { bg: "#401c00", text: "#ffffff" },
+        "tenis":      { bg: "#6a3d9a", text: "#ffffff" },
+        "esports":    { bg: "#e31a1c", text: "#ffffff" }
+    };
+    const corCasaPadrao = { bg: "#333", text: "#fff" };
+    const corEsportePadrao = { bg: "#444", text: "#fff" };
+
+    const corCasaObj = coresCasas[casa.toLowerCase()] || corCasaPadrao;
+    const corEsporteObj = coresEsportes[esporte.toLowerCase()] || corEsportePadrao;
+
+    // Card
+    const card = dv.el('div', '', {
+        attr: { 
+            style: 'display: flex; flex-direction: row; align-items: center; padding: 14px 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 8px; border: 1px solid #333; list-style: none; overflow-x: auto; white-space: nowrap;'
+        }
+    });
+    // Badges
+    const badges = dv.el('div', [
+        createBadge(casa, corCasaObj.bg, corCasaObj.text),
+        createBadge(esporte, corEsporteObj.bg, corEsporteObj.text)
+    ], { attr: { style: 'display: flex; flex-direction: row; margin: 0; padding: 0; gap: 6px; flex-shrink: 0;' } });
+    card.appendChild(badges);
+    // Título (clique abre a nota)
+    const title = dv.el('div', dv.fileLink(page.file.path, false, page.file.name), {
+        attr: { style: 'font-size: 16px; font-weight: 600; color: #fff; margin: 0 0 0 14px; padding: 0; line-height: 1.3; flex-shrink: 0;' } 
+    });
+    card.appendChild(title);
+    
+    // --- STATS COM AS NOVAS CORES ---
+    card.appendChild(createStat("Cotação", odd_num.toFixed(3), corOdd));
+    card.appendChild(createStat("Valor", `${valor.toFixed(2)} R$`, corValor));
+    card.appendChild(createStat("Lucro", `${lucro.toFixed(2)} R$`, corLucro));
+    card.appendChild(createStat("Total", `${ganho.toFixed(2)} R$`, corGanho));
 }
-
 ```
 
 ---
+
+```dataviewjs
+// --- CONFIGURAÇÃO ---
+// Use o formato 'YYYY-MM-DD' para a data
+const dataDeHoje = '2025-10-27'; 
+// --- FIM DA CONFIGURAÇÃO ---
+
+// 1. Pega todas as apostas resolvidas do dia
+const pages = dv.pages('#aposta')
+    .where(p => {
+        const dataValida = dv.date(p.data);
+        if (!dataValida) return false;
+        const resultado = (p.resultado || "").toLowerCase().trim();
+        const eResolvida = (resultado === 'green' || resultado === 'red');
+        const eHoje = (dataValida.toISODate() === dataDeHoje);
+        return eResolvida && eHoje;
+    });
+
+// 2. Função para calcular o lucro
+function calcularLucro(page) {
+    const valor = Number((page.valor_apostado || '0').toString().replace(",", ".")) || 0;
+    const odd = Number((page.odd || '0').toString().replace(",", ".")) || 0;
+    const resultado = page.resultado.toLowerCase();
+    if (resultado == 'green') return (valor * odd) - valor;
+    if (resultado == 'red') return -valor;
+    return 0;
+}
+
+// 3. Agrupa os lucros por tipster
+const lucrosPorTipster = {};
+let lucroEu = 0;
+let lucroTotalDoDia = 0;
+let temApostaEu = false; // Flag para saber se "Eu" tive apostas
+
+for (let p of pages) {
+    const lucro = calcularLucro(p);
+    lucroTotalDoDia += lucro; 
+    const tipster = p.tipster;
+
+    if (!tipster) {
+        lucroEu += lucro;
+        temApostaEu = true; // Marca que "Eu" tive aposta
+    } else {
+        if (!lucrosPorTipster[tipster]) {
+            lucrosPorTipster[tipster] = 0;
+        }
+        lucrosPorTipster[tipster] += lucro;
+    }
+}
+
+// 4. --- FUNÇÃO CORRIGIDA ---
+//    Usa strings de HTML para evitar o bug do dv.el() + dv.table()
+function createRow(tipsterName, lucro, isTotal = false) {
+    const corLucro = lucro > 0 ? '#43cc56' : (lucro < 0 ? '#f04134' : '#a0a0a0');
+    
+    // Se o lucro for 0 E não for a linha Total, mostra '-', senão mostra o número
+    const lucroFormatado = (lucro === 0 && !isTotal) ? '-' : lucro.toFixed(2);
+    
+    // Estilo do nome (Total fica em negrito e maiúsculo)
+    const nameStyle = isTotal ? 'font-weight: 700; text-transform: uppercase;' : 'font-weight: 600;';
+    const nameSpan = `<span style="${nameStyle}">${tipsterName}</span>`;
+    
+    // Símbolo R$
+    const RSpan = `<span style="color: #a0a0a0; margin-right: 5px;">R$</span>`;
+    
+    // Valor do Lucro (Total fica em negrito)
+    const lucroStyle = isTotal ? 'font-weight: 700;' : 'font-weight: 600;';
+    const lucroSpan = `<span style="${lucroStyle} color: ${corLucro};">${lucroFormatado}</span>`;
+
+    // Retorna um array de strings
+    return [nameSpan, RSpan, lucroSpan];
+}
+
+// 5. Monta a tabela
+const tabela = [];
+let tipsterCount = 0;
+
+// Adiciona os Tipsters
+for (let tipsterName in lucrosPorTipster) {
+    tabela.push(createRow(tipsterName, lucrosPorTipster[tipsterName]));
+    tipsterCount++;
+}
+
+// Adiciona "Eu"
+tabela.push(createRow("Eu", lucroEu));
+if (temApostaEu) tipsterCount++; // Só conta "Eu" se eu tive aposta
+
+// Adiciona o Total
+tabela.push(createRow("Lucro Total", lucroTotalDoDia, true)); // true = isTotal
+
+// 6. Renderiza a tabela
+// Cria o cabeçalho dinâmico
+const header = [`TIPSTER (${tipsterCount})`, " ", "LUCRO"];
+
+dv.table(header, tabela);
+```
+
+```chartsview
+type: view
+layout:
+  type: 'cols' # 'cols' para lado a lado, 'rows' para um em cima do outro
+views:
+  - type: 'line' # Seu primeiro gráfico
+    title:
+      text: 'Gráfico de Linha'
+    data: |
+      dataviewjs:
+        return [
+          { x: 'Jan', y: 10 },
+          { x: 'Fev', y: 20 },
+        ];
+    options:
+      xField: 'x'
+      yField: 'y'
+      
+  - type: 'pie' # Seu segundo gráfico
+    title:
+      text: 'Gráfico de Pizza'
+    data: |
+      dataviewjs:
+        return [
+          { name: 'Tipo A', value: 40 },
+          { name: 'Tipo B', value: 60 },
+        ];
+    options:
+      angleField: 'value'
+      colorField: 'name'
+```
+
+
+```chartsview
+type: view
+layout:
+  type: 'tabs' # Isso cria as abas
+views:
+  # --- Aba 1: Gráfico de Linha ---
+  - type: 'line'
+    data: |
+      dataviewjs:
+        const dataPoints = dv.pages('#aposta')
+          .where(p => {
+            const dataValida = dv.date(p.data);
+            const resultado = (p.resultado || "").toLowerCase().trim();
+            return dataValida && (resultado === 'green' || resultado === 'red');
+          })
+          .groupBy(p => dv.date(p.data).toISODate())
+          .map(g => ({
+            x: g.key,
+            y: g.rows.map(p => {
+              const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+              const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+              const resultado = p.resultado.toLowerCase();
+              if (resultado == 'green') {
+                return (valor * odd) - valor;
+              } else if (resultado == 'red') {
+                return -valor;
+              }
+              return 0;
+            }).array()
+            .reduce((sum, val) => sum + val, 0),
+            group: 'Lucro Diário'
+          }))
+          .sort(p => p.x, 'asc');
+        return dataPoints.array();
+    options:
+      title:
+        text: 'Desempenho Diário'
+      legend:
+        position: 'top-right'
+      xField: 'x'
+      yField: 'y'
+      seriesField: 'group'
+      color: ['#43cc56']
+      smooth: true
+      area:
+        style:
+          fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
+          fillOpacity: 0.7
+      yAxis:
+        title:
+          text: 'Lucro (R$)'
+        label:
+          formatter: |
+            function(v) {
+              return v + ' R$';
+            }
+      xAxis:
+        title:
+          text: 'Data'
+      tooltip:
+        formatter: |
+          function(datum) {
+            return {
+              name: datum.group,
+              value: datum.y.toFixed(2) + ' R$'
+            };
+          }
+
+  # --- Aba 2: Gráfico de Pizza ---
+  - type: 'pie'
+    data: |
+      dataviewjs:
+        const pages_pie = dv.pages('#aposta');
+        const counts = { green: 0, red: 0, pendente: 0 };
+        for (let p of pages_pie) {
+          if (p.resultado && typeof p.resultado === 'string') {
+            let r = p.resultado.toLowerCase().trim();
+            if (r === 'green') {
+              counts.green++;
+            } else if (r === 'red') {
+              counts.red++;
+            } else if (r === 'pendente') {
+              counts.pendente++;
+            }
+          }
+        }
+        return [
+          { name: "green", value: counts.green },
+          { name: "red", value: counts.red },
+          { name: "pendente", value: counts.pendente }
+        ];
+    options:
+      title:
+        text: 'Resultados (Pizza)'
+      angleField: 'value'
+      colorField: 'name'
+      color:
+        - '#43cc56'
+        - '#ff2626'
+        - '#b0b0b0'
+      radius: 0.8
+      label:
+        type: 'outer'
+        style:
+          fill: '#fff'
+        content: '{name} {percentage}'
+      legend:
+        marker:
+          symbol: 'circle'
+          style:
+            r: 8
+      interactions:
+        - type: 'element-active'
+```
+
+
+> [!multi-column]
+>
+> > [!info]+ Desempenho Diário
+> > ```chartsview
+> > type: Line
+> > data: |
+> >   dataviewjs:
+> >     const dataPoints = dv.pages('#aposta')
+> >       .where(p => {
+> >         const dataValida = dv.date(p.data);
+> >         const resultado = (p.resultado || "").toLowerCase().trim();
+> >         return dataValida && (resultado === 'green' || resultado === 'red');
+> >       })
+> >       .groupBy(p => dv.date(p.data).toISODate())
+> >       .map(g => ({
+> >         x: g.key,
+> >         y: g.rows.map(p => {
+> >           const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
+> >           const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
+> >           const resultado = p.resultado.toLowerCase();
+> >           if (resultado == 'green') {
+> >             return (valor * odd) - valor;
+> >           } else if (resultado == 'red') {
+> >             return -valor;
+> >           }
+> >           return 0;
+> >         }).array()
+> >         .reduce((sum, val) => sum + val, 0),
+> >         group: 'Lucro Diário'
+> >       }))
+> >       .sort(p => p.x, 'asc');
+> >     return dataPoints.array();
+> > options:
+> >   title:
+> >     text: 'Desempenho Diário'
+> >   legend:
+> >     position: 'top-right'
+> >   xField: 'x'
+> >   yField: 'y'
+> >   seriesField: 'group'
+> >   color: ['#43cc56']
+> >   smooth: true
+> >   area:
+> >     style:
+> >       fill: 'l(90) 0:#43cc56 1:rgba(67,204,86,0.1)'
+> >       fillOpacity: 0.7
+> >   yAxis:
+> >     title:
+> >       text: 'Lucro (R$)'
+> >     label:
+> >       formatter: |
+> >         function(v) {
+> >           return v + ' R$';
+> >         }
+> >   xAxis:
+> >     title:
+> >       text: 'Data'
+> >   tooltip:
+> >     formatter: |
+> >       function(datum) {
+> >         return {
+> >           name: datum.group,
+> >           value: datum.y.toFixed(2) + ' R$'
+> >         };
+> >       }
+> > ```
+>
+> > [!info]+ Resultados (Pizza)
+> > ```chartsview
+> > type: Pie
+> > data: |
+> >   dataviewjs:
+> >     const pages_pie = dv.pages('#aposta');
+> >     const counts = { green: 0, red: 0, pendente: 0 };
+> >     for (let p of pages_pie) {
+> >       if (p.resultado && typeof p.resultado === 'string') {
+> >         let r = p.resultado.toLowerCase().trim();
+> >         if (r === 'green') {
+> >           counts.green++;
+> >         } else if (r === 'red') {
+> >           counts.red++;
+> >         } else if (r === 'pendente') {
+> >           counts.pendente++;
+> >         }
+> >       }
+> >     }
+> >     return [
+> >       { name: "green", value: counts.green },
+> >       { name: "red", value: counts.red },
+> >       { name: "pendente", value: counts.pendente }
+> >     ];
+> > options:
+> >   title:
+> >     text: 'Resultados (Pizza)'
+> >   angleField: 'value'
+> >   colorField: 'name'
+> >   color:
+> >     - '#43cc56'
+> >     - '#ff2626'
+> >     - '#b0b0b0'
+> >   radius: 0.8
+> >   label:
+> >     type: 'outer'
+> >     style:
+> >       fill: '#fff'
+> >     content: '{name} {percentage}'
+> >   legend:
+> >     marker:
+> >       symbol: 'circle'
+> >       style:
+> >         r: 8
+> >   interactions:
+> >     - type: 'element-active'
+> > ```
 
