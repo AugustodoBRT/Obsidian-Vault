@@ -185,7 +185,7 @@ options:
 > > [!example]+ Progresso
 > > ```dataviewjs
 > > // --- Defina sua banca ATUAL aqui (mesmo valor da outra coluna) ---
-> > const bancaAtual = 1000;
+> > const bancaAtual = 500;
 > > 
 > > // --- 2. COLETA DE DADOS ---
 > > // (Esta lógica é duplicada para funcionar na segunda coluna)
