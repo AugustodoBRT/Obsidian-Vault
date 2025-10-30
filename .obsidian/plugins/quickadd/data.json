@@ -31,7 +31,7 @@
       "name": "Nova Aposta",
       "type": "Template",
       "command": false,
-      "templatePath": "cofrinho/Templates/Apostas.md",
+      "templatePath": "Templates/Apostas.md",
       "fileNameFormat": {
         "enabled": false,
         "format": ""
