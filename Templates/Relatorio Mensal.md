@@ -211,7 +211,7 @@ cssclasses:
 > >     const tabela = [
 > >         ["Apostas", totalApostas],
 > >         ["Taxa de Acerto", `<span style="font-weight: 600; color: ${corWinrate};">${winrate.toFixed(2)}%</span>`],
-> >         ["Odd Média (Total)", oddMedia.toFixed(2)], // <-- NOME ATUALIZADO
+> >         ["Odd Média", oddMedia.toFixed(2)], // <-- NOME ATUALIZADO
 > >         ["Investido", `R$ ${totalInvestido.toFixed(2)}`],
 > >         ["Lucro/Perda", `<span style="font-weight: 800; color: ${corLucro};">R$ ${totalLucro.toFixed(2)}</span>`],
 > >         ["ROI", `<span style="font-weight: 800; color: ${corROI};">${totalROI.toFixed(2)}%</span>`]
