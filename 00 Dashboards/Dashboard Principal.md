@@ -253,92 +253,182 @@ options:
 
 ---
 ```dataviewjs
-// --- 1. DEFINIÇÕES ---
+// --- 0. CSS CUSTOMIZADO ---
+// Injeta um bloco de <style> para formatar nossa tabela
+const styles = `
+<style>
+/* A tabela principal */
+.dv-summary-table {
+    width: 100%;
+    border-collapse: collapse; /* Borda limpa */
+    font-size: 0.9em; /* Um pouco menor e mais denso */
+    margin-top: 10px;
+}
+/* Células do Cabeçalho e Corpo */
+.dv-summary-table th, .dv-summary-table td {
+    padding: 10px 8px; /* Mais espaço vertical */
+    text-align: left;
+    border-bottom: 1px solid #333; /* Borda escura sutil */
+}
+/* Cabeçalho */
+.dv-summary-table th {
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted); /* Cor mais suave (Obsidian) */
+    border-bottom-width: 2px; /* Linha mais grossa no header */
+}
+/* Alinhamento de células numéricas */
+.dv-summary-table td.dv-cell-right,
+.dv-summary-table th.dv-cell-right {
+    text-align: right;
+    font-family: 'Consolas', 'Menlo', monospace; /* Números alinhados */
+}
+/* Classes de Cor */
+.dv-summary-table td.dv-cell-profit {
+    color: #43cc56;
+    font-weight: 600;
+}
+.dv-summary-table td.dv-cell-loss {
+    color: #f04134;
+    font-weight: 600;
+}
+.dv-summary-table td.dv-cell-neutral {
+    color: #a0a0a0;
+}
+/* Célula do Mês */
+.dv-summary-table td.dv-cell-month {
+     font-weight: 600;
+}
+/* Linha de Total */
+.dv-summary-table tr.dv-total-row {
+    background-color: rgba(128, 128, 128, 0.1); /* Fundo sutil */
+    border-top: 2px solid #555;
+}
+/* Células do Total */
+.dv-summary-table tr.dv-total-row td {
+    font-weight: 800;
+    font-size: 1.05em; /* Ligeiramente maior */
+}
+</style>
+`;
+// Renderiza o CSS
+dv.el("div", "", { html: styles });
+
+// --- 1. COLETA DE DADOS ---
 const pages = dv.pages()
     .where(p => p.tipo === 'relatorio-mensal' && p.mes_relatorio)
     .sort(p => p.mes_relatorio, 'asc');
 
-const headers = ["MÊS", "APOSTAS", "INVESTIDO", "% DE ACERTO", "ODD MÉDIA", "LUCRO/PERDA", "ROI"];
+let totalApostas = 0, totalInvestido = 0, totalLucro = 0, totalGreens = 0, totalSumOdds = 0;
 
-// --- 2. FUNÇÕES DE FORMATAÇÃO ---
-function formatCurrency(num) {
-    const cor = num > 0 ? '#43cc56' : (num < 0 ? '#f04134' : '#a0a0a0');
-    return `<span style="font-weight: 600; color: ${cor};">R$ ${num.toFixed(2)}</span>`;
-}
-
-// Para ROI (com cor)
-function formatPercent(num, bold) {
-    const cor = num > 0 ? '#43cc56' : (num < 0 ? '#f04134' : '#a0a0a0');
-    const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
-    return `<span style="${style} color: ${cor};">${num.toFixed(3)}%</span>`; 
-}
-
-// Para % de Acerto (sem cor, como na imagem)
-function formatPercentSimple(num, bold) {
-    const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
-    return `<span style="${style}">${num.toFixed(3)}%</span>`;
-}
-
-// --- 3. PROCESSAR DADOS DE CADA MÊS ---
-let totalApostas = 0;
-let totalInvestido = 0;
-let totalLucro = 0;
-let totalGreens = 0; // Para recalcular a taxa de acerto total
-let totalSumOdds = 0; // Para recalcular a odd média total
-
+// Processa os dados em objetos
 const reports = pages.map(p => {
-    const mes = dv.date(p.mes_relatorio).toFormat("MMMM/yy");
     const apostas = p.resumo_apostas || 0;
     const investido = p.resumo_investido || 0;
     const lucro = p.resumo_lucro || 0;
     const acertos = p.resumo_acertos || 0;
-    const oddMedia = p.resumo_odd_media || 0; // Agora funcionando!
+    const oddMedia = p.resumo_odd_media || 0;
     const roi = (investido === 0) ? 0 : (lucro / investido) * 100;
     
-    // Para o cálculo total
+    // Acumula totais
     const greensMes = apostas * (acertos / 100);
     const sumOddsMes = oddMedia * apostas;
-
-    // Acumula os totais
     totalApostas += apostas;
     totalInvestido += investido;
     totalLucro += lucro;
     totalGreens += greensMes;
     totalSumOdds += sumOddsMes;
 
-    return [
-        `<strong>${mes}</strong>`, // Deixa o Mês em negrito
-        apostas,
-        `R$ ${investido.toFixed(2)}`,
-        formatPercentSimple(acertos, false), // Usa a formatação simples
-        oddMedia.toFixed(3),
-        formatCurrency(lucro),
-        formatPercent(roi, false) // Usa a formatação com cor
-    ];
-}).array(); // Converte para array normal
+    return {
+        mes: dv.date(p.mes_relatorio).toFormat("MMMM/yy"),
+        apostas: apostas,
+        investido: investido,
+        acertos: acertos,
+        oddMedia: oddMedia,
+        lucro: lucro,
+        roi: roi
+    };
+}).array();
 
-// --- 4. CALCULAR E ADICIONAR LINHA TOTAL ---
-
-// Recalcula as médias totais
+// --- 2. CÁLCULO TOTAL ---
 const totalAcertos = (totalApostas === 0) ? 0 : (totalGreens / totalApostas) * 100;
 const totalOddMedia = (totalApostas === 0) ? 0 : (totalSumOdds / totalApostas);
 const totalROI = (totalInvestido === 0) ? 0 : (totalLucro / totalInvestido) * 100;
 
-// Formata a linha de total com negrito
-const totalRow = [
-    `<strong>TOTAL</strong>`,
-    `<strong>${totalApostas}</strong>`,
-    `<strong>R$ ${totalInvestido.toFixed(2)}</strong>`,
-    `<strong>${formatPercentSimple(totalAcertos, true)}</strong>`, // Usa a formatação simples
-    `<strong>${totalOddMedia.toFixed(3)}</strong>`,
-    `<strong>${formatCurrency(totalLucro)}</strong>`,
-    `<strong>${formatPercent(totalROI, true)}</strong>` // Usa a formatação com cor
-];
-
+// Cria o objeto da linha total
+const totalRow = {
+    mes: "TOTAL",
+    apostas: totalApostas,
+    investido: totalInvestido,
+    acertos: totalAcertos,
+    oddMedia: totalOddMedia,
+    lucro: totalLucro,
+    roi: totalROI
+};
+// Adiciona o total à lista
 reports.push(totalRow);
 
-// --- 5. RENDERIZAR TABELA ---
-dv.table(headers, reports);
+// --- 3. RENDERIZAÇÃO HTML ---
+const headers = ["MÊS", "APOSTAS", "INVESTIDO", "% DE ACERTO", "ODD MÉDIA", "LUCRO/PERDA", "ROI"];
+
+// Cria o elemento <table>
+const table = dv.el("table", "", { cls: "dv-summary-table" });
+
+// Cria o Cabeçalho (<thead>)
+const thead = table.createEl("thead");
+const hr = thead.createEl("tr");
+headers.forEach((h, i) => {
+    hr.createEl("th", { 
+        text: h, 
+        // Alinha à direita todos, menos o primeiro
+        cls: (i > 0 ? "dv-cell-right" : "") 
+    });
+});
+
+// Cria o Corpo (<tbody>)
+const tbody = table.createEl("tbody");
+
+// Função helper para classe de cor
+function getNumClass(num) {
+    return num > 0 ? "dv-cell-profit" : (num < 0 ? "dv-cell-loss" : "dv-cell-neutral");
+}
+
+// Itera sobre os dados (meses + total)
+reports.forEach(r => {
+    const isTotalRow = (r.mes === "TOTAL");
+    // Adiciona a classe 'dv-total-row' se for a linha de total
+    const rowCls = isTotalRow ? "dv-total-row" : "";
+    
+    const tr = tbody.createEl("tr", { cls: rowCls });
+
+    // Coluna 1: Mês
+    tr.createEl("td", { text: r.mes, cls: "dv-cell-month" });
+    
+    // Coluna 2: Apostas
+    tr.createEl("td", { text: r.apostas, cls: "dv-cell-right" });
+    
+    // Coluna 3: Investido
+    tr.createEl("td", { text: `R$ ${r.investido.toFixed(2)}`, cls: "dv-cell-right" });
+    
+    // Coluna 4: % de Acerto
+    tr.createEl("td", { text: `${r.acertos.toFixed(3)}%`, cls: "dv-cell-right" });
+    
+    // Coluna 5: Odd Média
+    tr.createEl("td", { text: r.oddMedia.toFixed(3), cls: "dv-cell-right" });
+    
+    // Coluna 6: Lucro/Perda (com cor)
+    tr.createEl("td", { 
+        text: `R$ ${r.lucro.toFixed(2)}`, 
+        cls: `dv-cell-right ${getNumClass(r.lucro)}` 
+    });
+    
+    // Coluna 7: ROI (com cor)
+    tr.createEl("td", { 
+        text: `${r.roi.toFixed(3)}%`, 
+        cls: `dv-cell-right ${getNumClass(r.roi)}`
+    });
+});
 ```
 
 ---
