@@ -262,34 +262,30 @@ const pages = dv.pages()
 const headers = ["MÊS", "APOSTAS", "INVESTIDO", "% DE ACERTO", "ODD MÉDIA", "LUCRO/PERDA", "ROI"];
 
 // --- 2. FUNÇÕES DE FORMATAÇÃO ---
-// Função para centralizar e adicionar estilo
-function format(text, style = "") {
-    return `<div style="text-align: center; ${style}">${text}</div>`;
-}
-
-// Formata moeda com cor e centraliza
-function formatCurrency(num, style = "") {
+function formatCurrency(num) {
     const cor = num > 0 ? '#43cc56' : (num < 0 ? '#f04134' : '#a0a0a0');
-    return format(`R$ ${num.toFixed(2)}`, `color: ${cor}; font-weight: 600; ${style}`);
+    return `<span style="font-weight: 600; color: ${cor};">R$ ${num.toFixed(2)}</span>`;
 }
 
-// Formata ROI com cor e centraliza
-function formatPercent(num, style = "") {
+// Para ROI (com cor)
+function formatPercent(num, bold) {
     const cor = num > 0 ? '#43cc56' : (num < 0 ? '#f04134' : '#a0a0a0');
-    return format(`${num.toFixed(3)}%`, `color: ${cor}; font-weight: 600; ${style}`);
+    const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
+    return `<span style="${style} color: ${cor};">${num.toFixed(3)}%</span>`; 
 }
 
-// Formata % de acerto (simples) e centraliza
-function formatPercentSimple(num, style = "") {
-    return format(`${num.toFixed(3)}%`, style);
+// Para % de Acerto (sem cor, como na imagem)
+function formatPercentSimple(num, bold) {
+    const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
+    return `<span style="${style}">${num.toFixed(3)}%</span>`;
 }
 
 // --- 3. PROCESSAR DADOS DE CADA MÊS ---
 let totalApostas = 0;
 let totalInvestido = 0;
 let totalLucro = 0;
-let totalGreens = 0;
-let totalSumOdds = 0;
+let totalGreens = 0; // Para recalcular a taxa de acerto total
+let totalSumOdds = 0; // Para recalcular a odd média total
 
 const reports = pages.map(p => {
     const mes = dv.date(p.mes_relatorio).toFormat("MMMM/yy");
@@ -297,12 +293,14 @@ const reports = pages.map(p => {
     const investido = p.resumo_investido || 0;
     const lucro = p.resumo_lucro || 0;
     const acertos = p.resumo_acertos || 0;
-    const oddMedia = p.resumo_odd_media || 0;
+    const oddMedia = p.resumo_odd_media || 0; // Agora funcionando!
     const roi = (investido === 0) ? 0 : (lucro / investido) * 100;
     
-    // Acumula totais
+    // Para o cálculo total
     const greensMes = apostas * (acertos / 100);
     const sumOddsMes = oddMedia * apostas;
+
+    // Acumula os totais
     totalApostas += apostas;
     totalInvestido += investido;
     totalLucro += lucro;
@@ -310,253 +308,37 @@ const reports = pages.map(p => {
     totalSumOdds += sumOddsMes;
 
     return [
-        format(mes, "font-weight: 600;"), // Mês
-        format(apostas), // Apostas
-        format(`R$ ${investido.toFixed(2)}`), // Investido
-        formatPercentSimple(acertos), // % Acerto
-        format(oddMedia.toFixed(3)), // Odd Média
-        formatCurrency(lucro), // Lucro/Perda
-        formatPercent(roi) // ROI
+        `<strong>${mes}</strong>`, // Deixa o Mês em negrito
+        apostas,
+        `R$ ${investido.toFixed(2)}`,
+        formatPercentSimple(acertos, false), // Usa a formatação simples
+        oddMedia.toFixed(3),
+        formatCurrency(lucro),
+        formatPercent(roi, false) // Usa a formatação com cor
     ];
-}).array();
+}).array(); // Converte para array normal
 
 // --- 4. CALCULAR E ADICIONAR LINHA TOTAL ---
+
+// Recalcula as médias totais
 const totalAcertos = (totalApostas === 0) ? 0 : (totalGreens / totalApostas) * 100;
 const totalOddMedia = (totalApostas === 0) ? 0 : (totalSumOdds / totalApostas);
 const totalROI = (totalInvestido === 0) ? 0 : (totalLucro / totalInvestido) * 100;
 
-// Estilo de negrito para a linha de total
-const bold = "font-weight: 800;";
-
+// Formata a linha de total com negrito
 const totalRow = [
-    format("TOTAL", bold),
-    format(totalApostas, bold),
-    format(`R$ ${totalInvestido.toFixed(2)}`, bold),
-    formatPercentSimple(totalAcertos, bold),
-    format(totalOddMedia.toFixed(3), bold),
-    formatCurrency(totalLucro, bold),
-    formatPercent(totalROI, bold)
+    `<strong>TOTAL</strong>`,
+    `<strong>${totalApostas}</strong>`,
+    `<strong>R$ ${totalInvestido.toFixed(2)}</strong>`,
+    `<strong>${formatPercentSimple(totalAcertos, true)}</strong>`, // Usa a formatação simples
+    `<strong>${totalOddMedia.toFixed(3)}</strong>`,
+    `<strong>${formatCurrency(totalLucro)}</strong>`,
+    `<strong>${formatPercent(totalROI, true)}</strong>` // Usa a formatação com cor
 ];
 
 reports.push(totalRow);
 
 // --- 5. RENDERIZAR TABELA ---
-// Centraliza os cabeçalhos
-const centeredHeaders = headers.map(h => format(h, "font-weight: 600;"));
-dv.table(centeredHeaders, reports);
+dv.table(headers, reports);
 ```
-
----
-> [!multi-column]
->
-> > [!tip]+  Resultados (Pizza)
-> > ```chartsview
-> > type: Pie
-> > data: |
-> >   dataviewjs:
-> >     const pages_pie = dv.pages('#aposta');
-> >     const counts = { green: 0, red: 0, pendente: 0 };
-> >     for (let p of pages_pie) {
-> >       
-> >       if (p.resultado && typeof p.resultado === 'string') {
-> >         
-> >         let r = p.resultado.toLowerCase().trim();
-> >         
-> >         
-> >         if (r === 'green') {
-> >           counts.green++;
-> >         } else if (r === 'red') {
-> >           counts.red++;
-> >         } else if (r === 'pendente') {
-> >           counts.pendente++;
-> >         }
-> >         
-> >       }
-> >       
-> >     }
-> >     return [
-> >       { name: "green", value: counts.green },
-> >       { name: "red", value: counts.red },
-> >       { name: "pendente", value: counts.pendente }
-> >     ];
-> > options:
-> >   angleField: 'value'
-> >   colorField: 'name'
-> >   color:
-> >     - '#43cc56'
-> >     - '#ff2626'
-> >     - '#b0b0b0'
-> >   radius: 0.8
-> >   label:
-> >     type: 'outer'
-> >     style:
-> >       fill: '#fff'
-> >     content: '{name} {percentage}'
-> >   legend:
-> >     marker:
-> >       symbol: 'circle'
-> >       style:
-> >         r: 8
-> >   interactions:
-> >     - type: 'element-active'
-> > ```
->
-> > [!example]+  Win Rate
-> > ```dataviewjs
-> > const totalPages_win = dv.pages('#aposta')
-> >   .where(p => typeof p.resultado === "string" && (p.resultado.toLowerCase() == "green" || p.resultado.toLowerCase() == "red"));
-> > const greenPages_win = totalPages_win.where(p => p.resultado.toLowerCase() == "green");
-> > const winRate = (totalPages_win.length === 0) ? 0 : (greenPages_win.length / totalPages_win.length) * 100;
-> >
-> > 
-> > const lucroTotal = totalPages_win.map(p => {
-> >     const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
-> >     const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
-> >     const resultado = p.resultado.toLowerCase(); // a query já filtrou green/red
-> >     
-> >     if (resultado == 'green') {
-> >         return (valor * odd) - valor;
-> >     } else if (resultado == 'red') {
-> >         return -valor;
-> >     }
-> >     return 0; 
-> > }).array().reduce((a, b) => a + b, 0);
-> >
-> >
-> > let corFinal = '#ffffff';
-> > if (lucroTotal > 0) corFinal = '#43cc56';
-> > else if (lucroTotal < 0) corFinal = '#f04134';
-> > 
-> > const wrapper = dv.el('div', '', {
-> >     attr: {
-> >         style: 'height: 100%; min-height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center;'
-> >     }
-> > });
-> > 
-> > dv.el('div', 'WIN RATE', {
-> >   parent: wrapper,
-> >   attr: {
-> >     style: 'font-size: 1.5em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px; text-align: center;'
-> >   }
-> > });
-> > 
-> > dv.el('div', `${winRate.toFixed(2)}%`, {
-> >   parent: wrapper,
-> >   attr: {
-> >     style: `font-size: 6em; font-weight: 700; color: ${corFinal}; line-height: 1.0; text-align: center; letter-spacing: -1px;`
-> >   }
-> > });
-> > ```
----
-## Apostas do mês
-
-```dataviewjs
-function createStat(label, value, color = "#ffffff") {
-    return dv.el('div', [
-        dv.el('span', `${label}: `, { 
-            attr: { style: 'font-size: 12px; color: #a0a0a0; text-transform: uppercase; margin: 0; padding: 0; font-weight: 600;' }
-        }),
-        dv.el('span', value, { 
-            attr: { style: `font-size: 14px; font-weight: 600; color: ${color}; margin: 0; padding: 0;` }
-        })
-    ], { 
-        attr: { style: 'text-align: left; margin: 0 0 0 16px; padding: 0; white-space: nowrap; flex-shrink: 0' }
-    });
-}
-function createBadge(text, bgColor = "#333", textColor = "#fff") {
-    if (!text) return dv.el('span', '');
-    return dv.el('span', text, {
-        attr: { style: `font-size: 12px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background-color: ${bgColor}; color: ${textColor}; white-space: nowrap; flex-shrink: 0;` }
-    });
-}
-
-// Coleta e filtra as notas do mês atual com campo de data válido
-const pages = dv.pages('#aposta')
-    .where(p => {
-        const dataValida = dv.date(p.data);
-        if (!dataValida) return false;
-        return dataValida.month == dv.date("now").month && dataValida.year == dv.date("now").year;
-    })
-    .sort(p => p.file.ctime, 'desc'); // Última nota criada primeiro
-
-for (let page of pages) {
-    const odd_num = Number((page.odd || '0').toString().replace(",", ".")) || 0;
-    const valor = Number((page.valor_apostado || '0').toString().replace(",", ".")) || 0;
-    
-    const resultado = (page.resultado || 'pendente').toLowerCase().trim();
-    let lucro = 0;
-    if (resultado == 'green') {
-        lucro = (valor * odd_num) - valor;
-    } else if (resultado == 'red') {
-        lucro = -valor;
-    }
-
-    const casa = (typeof page.casa === "string" ? page.casa.trim() : "N/A");
-    const esporte = (typeof page.esporte === "string" ? page.esporte.trim() : "Aposta");
-    const ganho = valor + lucro;
-
-    // Cores
-    const corGreen = "#43cc56";
-    const corRed = "#f04134";
-    const corGrey = "#a0a0a0";
-    
-    // --- NOVAS CORES ---
-    const corOdd = "#e6c07b"; // Amarelo suave
-    const corValor = "#61afef"; // Azul claro
-
-    let corLucro = corGrey, corGanho = corGrey;
-    if (resultado == 'green') corLucro = corGanho = corGreen;
-    if (resultado == 'red') {
-        corLucro = corRed;
-        corGanho = (ganho > 0) ? corGreen : corRed; // <--- LINHA CORRIGIDA
-    }
-    if (lucro == 0) corLucro = corGrey;
-
-    const coresCasas = {
-        "stake":         { bg: "#000000", text: "#ffffff" },
-        "betano":        { bg: "#d45c00", text: "#ffffff" },
-        "superbet":      { bg: "#E60000", text: "#ffffff" },
-        "bet365":        { bg: "#04a367", text: "#ffffff" },
-        "betpix365":     { bg: "#FBC02D", text: "#000000" },
-        "betnacional":   { bg: "#007bff", text: "#ffffff" },
-        "esportes da sorte": { bg: "#003B73", text: "#ffffff" }
-    };
-    const coresEsportes = {
-        "futebol":    { bg: "#1f78b4", text: "#ffffff" },
-        "basquete":   { bg: "#401c00", text: "#ffffff" },
-        "tenis":      { bg: "#6a3d9a", text: "#ffffff" },
-        "esports":    { bg: "#e31a1c", text: "#ffffff" }
-    };
-    const corCasaPadrao = { bg: "#333", text: "#fff" };
-    const corEsportePadrao = { bg: "#444", text: "#fff" };
-
-    const corCasaObj = coresCasas[casa.toLowerCase()] || corCasaPadrao;
-    const corEsporteObj = coresEsportes[esporte.toLowerCase()] || corEsportePadrao;
-
-    // Card
-    const card = dv.el('div', '', {
-        attr: { 
-            style: 'display: flex; flex-direction: row; align-items: center; padding: 14px 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 8px; border: 1px solid #333; list-style: none; overflow-x: auto; white-space: nowrap;'
-        }
-    });
-    // Badges
-    const badges = dv.el('div', [
-        createBadge(casa, corCasaObj.bg, corCasaObj.text),
-        createBadge(esporte, corEsporteObj.bg, corEsporteObj.text)
-    ], { attr: { style: 'display: flex; flex-direction: row; margin: 0; padding: 0; gap: 6px; flex-shrink: 0;' } });
-    card.appendChild(badges);
-    // Título (clique abre a nota)
-    const title = dv.el('div', dv.fileLink(page.file.path, false, page.file.name), {
-        attr: { style: 'font-size: 16px; font-weight: 600; color: #fff; margin: 0 0 0 14px; padding: 0; line-height: 1.3; flex-shrink: 0;' } 
-    });
-    card.appendChild(title);
-    
-    // --- STATS COM AS NOVAS CORES ---
-    card.appendChild(createStat("Cotação", odd_num.toFixed(3), corOdd));
-    card.appendChild(createStat("Valor", `${valor.toFixed(2)} R$`, corValor));
-    card.appendChild(createStat("Lucro", `${lucro.toFixed(2)} R$`, corLucro));
-    card.appendChild(createStat("Total", `${ganho.toFixed(2)} R$`, corGanho));
-}
-```
-
 ---
