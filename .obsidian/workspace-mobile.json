@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 Dashboards/Relatórios Mensais/2025-10.md",
+                "file": "00 Dashboards/Dashboard Principal.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-10"
+              "title": "Dashboard Principal"
             }
           }
         ],
@@ -141,7 +141,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "00 Dashboards/Relatórios Mensais/2025-10.md",
+            "file": "00 Dashboards/Dashboard Principal.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -198,8 +198,8 @@
   },
   "active": "e24f32e8e64dfe48",
   "lastOpenFiles": [
-    "Apostas/2025/outubro/Cruzeiro vai golear.md",
     "00 Dashboards/Relatórios Mensais/2025-10.md",
+    "Apostas/2025/outubro/Cruzeiro vai golear.md",
     "00 Dashboards/Dashboard Principal.md",
     "Apostas/2025/outubro/Add.md",
     "00 Dashboards/Relatórios Mensais/2025-11.md",
