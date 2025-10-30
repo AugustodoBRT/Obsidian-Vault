@@ -113,7 +113,7 @@ options:
 > > [!tip]+ Estatisticas
 > > ```dataviewjs
 > > // --- Defina sua banca ATUAL aqui ---
-> > const bancaAtual = 1000;
+> > const bancaAtual = 500;
 > > 
 > > // --- 2. COLETA DE DADOS ---
 > > const pages = dv.pages().where(p => p.tipo === 'relatorio-mensal');
