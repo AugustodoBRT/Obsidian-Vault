@@ -252,6 +252,98 @@ options:
 > > ```
 
 ---
+```dataviewjs
+// --- 1. DEFINIÇÕES ---
+const pages = dv.pages()
+    .where(p => p.tipo === 'relatorio-mensal' && p.mes_relatorio)
+    .sort(p => p.mes_relatorio, 'asc');
+
+const tableData = [];
+const headers = ["MÊS", "APOSTAS", "INVESTIDO", "% DE ACERTO", "ODD MÉDIA", "LUCRO/PERDA", "ROI"];
+
+// --- 2. FUNÇÕES DE FORMATAÇÃO ---
+function formatCurrency(num) {
+    const cor = num > 0 ? '#43cc56' : (num < 0 ? '#f04134' : '#a0a0a0');
+    return `<span style="font-weight: 600; color: ${cor};">R$ ${num.toFixed(2)}</span>`;
+}
+
+function formatPercent(num, bold) {
+    const cor = num > 0 ? '#43cc56' : (num < 0 ? '#f04134' : '#a0a0a0');
+    const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
+    // O ROI da sua imagem tem 3 casas, % de acerto também.
+    return `<span style="${style} color: ${cor};">${num.toFixed(3)}%</span>`; 
+}
+
+function formatPercentAcertos(num, bold) {
+    // Para % de acerto, vamos usar 50% como o "divisor"
+    const cor = num >= 50 ? '#43cc56' : (num < 50 ? '#f04134' : '#a0a0a0');
+    const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
+    return `<span style="${style} color: ${cor};">${num.toFixed(3)}%</span>`;
+}
+
+// --- 3. PROCESSAR DADOS DE CADA MÊS ---
+let totalApostas = 0;
+let totalInvestido = 0;
+let totalLucro = 0;
+let totalGreens = 0; // Para recalcular a taxa de acerto total
+let totalSumOdds = 0; // Para recalcular a odd média total
+
+const reports = pages.map(p => {
+    const mes = dv.date(p.mes_relatorio).toFormat("MMMM/yy");
+    const apostas = p.resumo_apostas || 0;
+    const investido = p.resumo_investido || 0;
+    const lucro = p.resumo_lucro || 0;
+    const acertos = p.resumo_acertos || 0; // ex: 66.67
+    const oddMedia = p.resumo_odd_media || 0;
+    const roi = (investido === 0) ? 0 : (lucro / investido) * 100;
+    
+    // Para o cálculo total, precisamos reverter as médias
+    const greensMes = apostas * (acertos / 100);
+    const sumOddsMes = oddMedia * apostas;
+
+    // Acumula os totais
+    totalApostas += apostas;
+    totalInvestido += investido;
+    totalLucro += lucro;
+    totalGreens += greensMes;
+    totalSumOdds += sumOddsMes;
+
+    return [
+        mes,
+        apostas,
+        `R$ ${investido.toFixed(2)}`,
+        formatPercentAcertos(acertos, false),
+        oddMedia.toFixed(3),
+        formatCurrency(lucro),
+        formatPercent(roi, false)
+    ];
+}).array(); // <--- CORREÇÃO AQUI. Adiciona .array() para converter
+
+// --- 4. CALCULAR E ADICIONAR LINHA TOTAL ---
+
+// Recalcula as médias totais
+const totalAcertos = (totalApostas === 0) ? 0 : (totalGreens / totalApostas) * 100;
+const totalOddMedia = (totalApostas === 0) ? 0 : (totalSumOdds / totalApostas);
+const totalROI = (totalInvestido === 0) ? 0 : (totalLucro / totalInvestido) * 100;
+
+// Formata a linha de total com negrito
+const totalRow = [
+    `<strong>TOTAL</strong>`,
+    `<strong>${totalApostas}</strong>`,
+    `<strong>R$ ${totalInvestido.toFixed(2)}</strong>`,
+    `<strong>${formatPercentAcertos(totalAcertos, true)}</strong>`,
+    `<strong>${totalOddMedia.toFixed(3)}</strong>`,
+    `<strong>${formatCurrency(totalLucro)}</strong>`,
+    `<strong>${formatPercent(totalROI, true)}</strong>`
+];
+
+reports.push(totalRow); // Agora isso vai funcionar
+
+// --- 5. RENDERIZAR TABELA ---
+dv.table(headers, reports);
+```
+
+---
 > [!multi-column]
 >
 > > [!tip]+  Resultados (Pizza)
