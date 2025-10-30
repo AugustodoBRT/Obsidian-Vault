@@ -112,143 +112,148 @@ options:
 >
 > > [!tip]+ Estatisticas
 > > ```dataviewjs
-> > // --- Defina sua banca inicial aqui ---
-> > const bancaInicial = 1000;
+> > // --- Defina sua banca ATUAL aqui ---
+> > const bancaAtual = 1000;
 > > 
-> > // Query principal (executada uma vez)
-> > const pages_col1 = dv.pages('#aposta')
-> >   .where(p => p.resultado == "green" || p.resultado == "red");
+> > // --- 2. COLETA DE DADOS ---
+> > const pages = dv.pages().where(p => p.tipo === 'relatorio-mensal');
 > > 
-> > // --- 1. Card Banca Atual (Fixo) ---
+> > let totalApostas = 0;
+> > let totalInvestido = 0;
+> > let totalLucro = 0;
+> > let totalGreens = 0;
+> > let totalSumOdds = 0;
+> > 
+> > for (const p of pages) {
+> >     const apostas = p.resumo_apostas || 0;
+> >     const acertos = p.resumo_acertos || 0;
+> >     const oddMedia = p.resumo_odd_media || 0;
+> > 
+> >     totalApostas += apostas;
+> >     totalInvestido += p.resumo_investido || 0;
+> >     totalLucro += p.resumo_lucro || 0;
+> >     
+> >     totalGreens += apostas * (acertos / 100);
+> >     totalSumOdds += oddMedia * apostas;
+> > }
+> > 
+> > // --- 3. CÁLCULOS TOTAIS ---
+> > const totalAcertos = (totalApostas === 0) ? 0 : (totalGreens / totalApostas) * 100;
+> > 
+> > // --- 1. Card Banca Atual (Manual) ---
 > > const card_banca_ini = dv.el('div', '', {
-> >   attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
+> >     attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
 > > });
 > > dv.el('div', 'BANCA ATUAL', {
-> >   parent: card_banca_ini,
-> >   attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
+> >     parent: card_banca_ini,
+> >     attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
 > > });
-> > dv.el('div', `${bancaInicial.toFixed(2)} R$`, {
-> >   parent: card_banca_ini,
-> >   attr: { style: 'font-size: 2em; font-weight: 700; color: #ffffff;' }
+> > dv.el('div', `${bancaAtual.toFixed(2)} R$`, {
+> >     parent: card_banca_ini,
+> >     attr: { style: 'font-size: 2em; font-weight: 700; color: #ffffff;' }
 > > });
 > > 
-> > // --- 2. Card Apostas (Contagem) ---
+> > // --- 2. Card Apostas (Calculado) ---
 > > const card_apostas = dv.el('div', '', {
-> >   attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
+> >     attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
 > > });
-> > dv.el('div', 'APOSTAS', {
-> >   parent: card_apostas,
-> >   attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
+> > dv.el('div', 'APOSTAS TOTAIS', {
+> >     parent: card_apostas,
+> >     attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
 > > });
-> > dv.el('div', pages_col1.length, {
-> >   parent: card_apostas,
-> >   attr: { style: 'font-size: 2em; font-weight: 700; color: #ffffff;' }
+> > dv.el('div', totalApostas, {
+> >     parent: card_apostas,
+> >     attr: { style: 'font-size: 2em; font-weight: 700; color: #ffffff;' }
 > > });
 > > 
-> > // --- 3. Card Progressão (% Banca) ---
-> > // --- MUDANÇA AQUI: Cálculo de Lucro dinâmico ---
-> > const lucroTotal_col1 = pages_col1.map(p => {
-> >     const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
-> >     const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
-> >     const resultado = p.resultado.toLowerCase();
-> >     
-> >     if (resultado == 'green') {
-> >         return (valor * odd) - valor;
-> >     } else if (resultado == 'red') {
-> >         return -valor;
-> >     }
-> >     return 0;
-> > }).array().reduce((sum, val) => sum + val, 0);
-> > // --- FIM DA MUDANÇA ---
+> > // --- 3. Card Taxa de Acerto (Calculado) ---
+> > const corAcerto = (totalAcertos >= 50) ? '#43cc56' : '#f04134';
 > > 
-> > const progressao = (bancaInicial === 0) ? 0 : (lucroTotal_col1 / bancaInicial) * 100;
-> > const corProgressao = (progressao >= 0) ? '#43cc56' : '#f04134';
-> > 
-> > const card_prog = dv.el('div', '', {
-> >   attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
+> > const card_acerto = dv.el('div', '', {
+> >     attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
 > > });
-> > dv.el('div', 'PROGRESSÃO', {
-> >   parent: card_prog,
-> >   attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
+> > dv.el('div', 'TAXA DE ACERTO', {
+> >     parent: card_acerto,
+> >     attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
 > > });
-> > dv.el('div', `${progressao.toFixed(2)}%`, {
-> >   parent: card_prog,
-> >   attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corProgressao }
+> > dv.el('div', `${totalAcertos.toFixed(2)}%`, {
+> >     parent: card_acerto,
+> >     attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corAcerto }
 > > });
 > > ```
 >
 > > [!example]+ Progresso
 > > ```dataviewjs
-> > // --- Defina sua banca inicial aqui ---
-> > const bancaInicial = 1000;
+> > // --- Defina sua banca ATUAL aqui (mesmo valor da outra coluna) ---
+> > const bancaAtual = 1000;
 > > 
-> > // Query principal (executada uma vez)
-> > const pages_col2 = dv.pages('#aposta')
-> >   .where(p => p.resultado == "green" || p.resultado == "red");
+> > // --- 2. COLETA DE DADOS ---
+> > // (Esta lógica é duplicada para funcionar na segunda coluna)
+> > const pages = dv.pages().where(p => p.tipo === 'relatorio-mensal');
 > > 
-> > // --- Cálculos necessários ---
-> > // --- MUDANÇA AQUI: Cálculo de Lucro dinâmico ---
-> > const lucroTotal_col2 = pages_col2.map(p => {
-> >     const valor = Number((p.valor_apostado || '0').toString().replace(",", ".")) || 0;
-> >     const odd = Number((p.odd || '0').toString().replace(",", ".")) || 0;
-> >     const resultado = p.resultado.toLowerCase();
+> > let totalApostas = 0;
+> > let totalInvestido = 0;
+> > let totalLucro = 0;
+> > let totalGreens = 0;
+> > let totalSumOdds = 0;
+> > 
+> > for (const p of pages) {
+> >     const apostas = p.resumo_apostas || 0;
+> >     const acertos = p.resumo_acertos || 0;
+> >     const oddMedia = p.resumo_odd_media || 0;
+> > 
+> >     totalApostas += apostas;
+> >     totalInvestido += p.resumo_investido || 0;
+> >     totalLucro += p.resumo_lucro || 0;
 > >     
-> >     if (resultado == 'green') {
-> >         return (valor * odd) - valor;
-> >     } else if (resultado == 'red') {
-> >         return -valor;
-> >     }
-> >     return 0;
-> > }).array().reduce((sum, val) => sum + val, 0);
-> > // --- FIM DA MUDANÇA ---
+> >     totalGreens += apostas * (acertos / 100);
+> >     totalSumOdds += oddMedia * apostas;
+> > }
 > > 
-> > const investTotal_col2 = pages_col2.map(p => Number(p.valor_apostado) || 0)
-> >                                     .array()
-> >                                     .reduce((sum, val) => sum + val, 0);
-> >                                     
-> > const roi_col2 = (investTotal_col2 === 0) ? 0 : (lucroTotal_col2 / investTotal_col2) * 100;
-> > const bancaTotal = bancaInicial + lucroTotal_col2;
+> > // --- 3. CÁLCULOS TOTAIS ---
+> > const bancaTotal = bancaAtual + totalLucro;
+> > const totalROI = (totalInvestido === 0) ? 0 : (totalLucro / totalInvestido) * 100;
 > > 
 > > // --- 1. Card Banca Total (Calculado) ---
-> > const corBancaTotal = (bancaTotal >= bancaInicial) ? '#43cc56' : '#f04134';
+> > const corBancaTotal = (bancaTotal >= bancaAtual) ? '#43cc56' : '#f04134';
 > > const card_banca_total = dv.el('div', '', {
-> >   attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
+> >     attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
 > > });
 > > dv.el('div', 'BANCA TOTAL', {
-> >   parent: card_banca_total,
-> >   attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
+> >     parent: card_banca_total,
+> >     attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
 > > });
 > > dv.el('div', `${bancaTotal.toFixed(2)} R$`, {
-> >   parent: card_banca_total,
-> >   attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corBancaTotal }
+> >     parent: card_banca_total,
+> >     attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corBancaTotal }
 > > });
 > > 
 > > // --- 2. Card Lucro Total ---
-> > const corLucro = (lucroTotal_col2 >= 0) ? '#43cc56' : '#f04134';
+> > const corLucro = (totalLucro >= 0) ? '#43cc56' : '#f04134';
 > > const card_lucro = dv.el('div', '', {
-> >   attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
+> >     attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
 > > });
 > > dv.el('div', 'LUCRO TOTAL', {
-> >   parent: card_lucro,
-> >   attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
+> >     parent: card_lucro,
+> >     attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
 > > });
-> > dv.el('div', `${lucroTotal_col2.toFixed(2)} R$`, {
-> >   parent: card_lucro,
-> >   attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corLucro }
+> > dv.el('div', `${totalLucro.toFixed(2)} R$`, {
+> >     parent: card_lucro,
+> >     attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corLucro }
 > > });
 > > 
 > > // --- 3. Card ROI ---
-> > const corROI = (roi_col2 >= 0) ? '#43cc56' : '#f04134';
+> > const corROI = (totalROI >= 0) ? '#43cc56' : '#f04134';
 > > const card_roi = dv.el('div', '', {
-> >   attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
+> >     attr: { style: 'padding: 16px; background-color: #1e1e1e; border-radius: 8px; margin-bottom: 10px; text-align: center; border: 1px solid #333;' }
 > > });
-> > dv.el('div', 'ROI', {
-> >   parent: card_roi,
-> >   attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
+> > dv.el('div', 'ROI TOTAL', {
+> >     parent: card_roi,
+> >     attr: { style: 'font-size: 0.9em; font-weight: 600; color: #a0a0a0; text-transform: uppercase; margin-bottom: 8px;' }
 > > });
-> > dv.el('div', `${roi_col2.toFixed(2)}%`, {
-> >   parent: card_roi,
-> >   attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corROI }
+> > dv.el('div', `${totalROI.toFixed(2)}%`, {
+> >     parent: card_roi,
+> >     attr: { style: 'font-size: 2em; font-weight: 700; color: ' + corROI }
 > > });
 > > ```
 
