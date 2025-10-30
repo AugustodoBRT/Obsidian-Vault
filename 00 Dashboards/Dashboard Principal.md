@@ -258,7 +258,6 @@ const pages = dv.pages()
     .where(p => p.tipo === 'relatorio-mensal' && p.mes_relatorio)
     .sort(p => p.mes_relatorio, 'asc');
 
-const tableData = [];
 const headers = ["MÊS", "APOSTAS", "INVESTIDO", "% DE ACERTO", "ODD MÉDIA", "LUCRO/PERDA", "ROI"];
 
 // --- 2. FUNÇÕES DE FORMATAÇÃO ---
@@ -267,18 +266,17 @@ function formatCurrency(num) {
     return `<span style="font-weight: 600; color: ${cor};">R$ ${num.toFixed(2)}</span>`;
 }
 
+// Para ROI (com cor)
 function formatPercent(num, bold) {
     const cor = num > 0 ? '#43cc56' : (num < 0 ? '#f04134' : '#a0a0a0');
     const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
-    // O ROI da sua imagem tem 3 casas, % de acerto também.
     return `<span style="${style} color: ${cor};">${num.toFixed(3)}%</span>`; 
 }
 
-function formatPercentAcertos(num, bold) {
-    // Para % de acerto, vamos usar 50% como o "divisor"
-    const cor = num >= 50 ? '#43cc56' : (num < 50 ? '#f04134' : '#a0a0a0');
+// Para % de Acerto (sem cor, como na imagem)
+function formatPercentSimple(num, bold) {
     const style = bold ? 'font-weight: 800;' : 'font-weight: 600;';
-    return `<span style="${style} color: ${cor};">${num.toFixed(3)}%</span>`;
+    return `<span style="${style}">${num.toFixed(3)}%</span>`;
 }
 
 // --- 3. PROCESSAR DADOS DE CADA MÊS ---
@@ -293,11 +291,11 @@ const reports = pages.map(p => {
     const apostas = p.resumo_apostas || 0;
     const investido = p.resumo_investido || 0;
     const lucro = p.resumo_lucro || 0;
-    const acertos = p.resumo_acertos || 0; // ex: 66.67
-    const oddMedia = p.resumo_odd_media || 0;
+    const acertos = p.resumo_acertos || 0;
+    const oddMedia = p.resumo_odd_media || 0; // Agora funcionando!
     const roi = (investido === 0) ? 0 : (lucro / investido) * 100;
     
-    // Para o cálculo total, precisamos reverter as médias
+    // Para o cálculo total
     const greensMes = apostas * (acertos / 100);
     const sumOddsMes = oddMedia * apostas;
 
@@ -309,15 +307,15 @@ const reports = pages.map(p => {
     totalSumOdds += sumOddsMes;
 
     return [
-        mes,
+        `<strong>${mes}</strong>`, // Deixa o Mês em negrito
         apostas,
         `R$ ${investido.toFixed(2)}`,
-        formatPercentAcertos(acertos, false),
+        formatPercentSimple(acertos, false), // Usa a formatação simples
         oddMedia.toFixed(3),
         formatCurrency(lucro),
-        formatPercent(roi, false)
+        formatPercent(roi, false) // Usa a formatação com cor
     ];
-}).array(); // <--- CORREÇÃO AQUI. Adiciona .array() para converter
+}).array(); // Converte para array normal
 
 // --- 4. CALCULAR E ADICIONAR LINHA TOTAL ---
 
@@ -331,13 +329,13 @@ const totalRow = [
     `<strong>TOTAL</strong>`,
     `<strong>${totalApostas}</strong>`,
     `<strong>R$ ${totalInvestido.toFixed(2)}</strong>`,
-    `<strong>${formatPercentAcertos(totalAcertos, true)}</strong>`,
+    `<strong>${formatPercentSimple(totalAcertos, true)}</strong>`, // Usa a formatação simples
     `<strong>${totalOddMedia.toFixed(3)}</strong>`,
     `<strong>${formatCurrency(totalLucro)}</strong>`,
-    `<strong>${formatPercent(totalROI, true)}</strong>`
+    `<strong>${formatPercent(totalROI, true)}</strong>` // Usa a formatação com cor
 ];
 
-reports.push(totalRow); // Agora isso vai funcionar
+reports.push(totalRow);
 
 // --- 5. RENDERIZAR TABELA ---
 dv.table(headers, reports);
