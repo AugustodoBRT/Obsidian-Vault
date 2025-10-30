@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Página Inicial.md",
+                "file": "00 Dashboards/Dashboard Principal.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Página Inicial"
+              "title": "Dashboard Principal"
             }
           }
         ],
@@ -113,7 +113,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Dashboards/Dashboard Principal.md",
+            "file": "00 Dashboards/Dashboard Principal.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -170,6 +170,8 @@
   },
   "active": "7c02fc6c2f710652",
   "lastOpenFiles": [
+    "00 Dashboards/Relatórios Mensais/2025-11.md",
+    "Página Inicial.md",
     "README.md.lock",
     "Dashboards/Dashboard Principal.md",
     "00 Dashboards/Relatórios Mensais/2025-10.md",
