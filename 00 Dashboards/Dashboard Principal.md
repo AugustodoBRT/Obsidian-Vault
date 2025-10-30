@@ -1,6 +1,7 @@
 ---
 cssclasses:
   - daily
+  - quarta-feira
 ---
 ##  Desempenho Geral
 
