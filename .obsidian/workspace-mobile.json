@@ -62,9 +62,23 @@
               "icon": "lucide-file",
               "title": "Resumo Diário"
             }
+          },
+          {
+            "id": "708bc8526d650524",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Apostas/2025/novembro/Philippe coutinho para tocar na bola.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Philippe coutinho para tocar na bola"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -141,7 +155,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "00 Dashboards/Dashboard Principal.md",
+            "file": "Apostas/2025/novembro/Philippe coutinho para tocar na bola.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -196,13 +210,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e24f32e8e64dfe48",
+  "active": "708bc8526d650524",
   "lastOpenFiles": [
+    "00 Dashboards/Resumo Diário.md",
+    "Apostas/2025/novembro/Philippe coutinho para tocar na bola.md",
     "apostaMacro2.js",
     "00 Dashboards/Resumo Anual.md",
     "00 Dashboards/Dashboard Principal.md",
     "Apostas/2025/outubro/lebron cai.md",
-    "00 Dashboards/Resumo Diário.md",
     "00 Dashboards/Relatórios Mensais/2025-10.md",
     "Apostas/2025/outubro/Cruzeiro vai golear.md",
     "Apostas/2025/outubro/Add.md",
