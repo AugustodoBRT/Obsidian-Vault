@@ -376,3 +376,5 @@ for (let page of pages) {
     card.appendChild(createStat("Total", `${ganho.toFixed(2)} R$`, corGanho));
 }
 ```
+---
+### Apostas Pendentes
