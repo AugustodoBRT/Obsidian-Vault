@@ -2,7 +2,7 @@
 tags:
   - aposta
 esporte: basquete
-data: 2025-11-1
+data: 2025-11-12
 odd: "2"
 valor_apostado: "20"
 porcentagem_da_aposta: 10%
