@@ -3,7 +3,9 @@ cssclasses:
   - daily
   - quinta-feira
 ---
+---
 ### Resumo Diário
+---
 
 > [!multi-column]
 >
@@ -67,8 +69,6 @@ cssclasses:
 > >     attr: { style: 'font-size: 3.5em; font-weight: 700; color: #ffffff;' }
 > > });
 > > ```
-
----
 
 > [!multi-column]
 >
