@@ -1,13 +1,13 @@
 ---
 tags:
   - aposta
-esporte: "futebol"
-data: "2025-11-01"
+esporte: futebol
+data: 2025-11-01
 odd: "6.2"
 valor_apostado: "1"
-porcentagem_da_aposta: "0.5%"
-resultado: "pendente"
+porcentagem_da_aposta: 0.5%
+resultado: pendente
 lucro: "0.00"
-casa: "betesporte"
-tipster: "pei"
+casa: betesporte
+tipster: pei
 ---
