@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 Dashboards/Dashboard Principal.md",
+                "file": "00 Dashboards/Resumo Diário.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Dashboard Principal"
+              "title": "Resumo Diário"
             }
           }
         ],
@@ -198,9 +198,11 @@
   },
   "active": "e24f32e8e64dfe48",
   "lastOpenFiles": [
+    "00 Dashboards/Dashboard Principal.md",
+    "Apostas/2025/outubro/lebron cai.md",
+    "00 Dashboards/Resumo Diário.md",
     "00 Dashboards/Relatórios Mensais/2025-10.md",
     "Apostas/2025/outubro/Cruzeiro vai golear.md",
-    "00 Dashboards/Dashboard Principal.md",
     "Apostas/2025/outubro/Add.md",
     "00 Dashboards/Relatórios Mensais/2025-11.md",
     "Página Inicial.md",
@@ -226,9 +228,7 @@
     "Apostas/2025/outubro/apostas",
     "Apostas/2025/October/DC flamengo e o 2.5 cartoes amarelos para o racing .md",
     "Dashboards/Graficos.md",
-    "Apostas/2025/October/Hulk marca.md",
     "Apostas/2025/October",
-    "cofrinho/Templates/Apostas.md",
     "cofrinho/Templates",
     "cofrinho",
     "quickadd-package-2025-10-29T03-06-57-796Z.quickadd.json",
