@@ -113,7 +113,7 @@ options:
 > > [!tip]+ Estatisticas
 > > ```dataviewjs
 > > // --- Defina sua banca ATUAL aqui ---
-> > const bancaAtual = 500;
+> > const bancaAtual = 200;
 > > 
 > > // --- 2. COLETA DE DADOS ---
 > > const pages = dv.pages().where(p => p.tipo === 'relatorio-mensal');
@@ -185,7 +185,7 @@ options:
 > > [!example]+ Progresso
 > > ```dataviewjs
 > > // --- Defina sua banca ATUAL aqui (mesmo valor da outra coluna) ---
-> > const bancaAtual = 500;
+> > const bancaAtual = 200;
 > > 
 > > // --- 2. COLETA DE DADOS ---
 > > // (Esta lógica é duplicada para funcionar na segunda coluna)
