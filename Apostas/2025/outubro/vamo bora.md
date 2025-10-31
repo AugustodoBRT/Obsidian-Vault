@@ -1,13 +1,13 @@
 ---
 tags:
   - aposta
-esporte: "futebol"
-data: "2025-11-03"
+esporte: futebol
+data: 2025-11-1
 odd: "3"
 valor_apostado: "50"
-porcentagem_da_aposta: "25%"
-resultado: "pendente"
+porcentagem_da_aposta: 25%
+resultado: green
 lucro: "0.00"
-casa: "betano"
-tipster: "Casebre"
+casa: betano
+tipster: Casebre
 ---
