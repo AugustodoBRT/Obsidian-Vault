@@ -244,9 +244,23 @@
               "icon": "lucide-file",
               "title": "tigres deportivo e  america para vencer"
             }
+          },
+          {
+            "id": "db679236f16d3042",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Apostas/2025/novembro/brasileirao menos 3.5 gols hoje.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "brasileirao menos 3.5 gols hoje"
+            }
           }
         ],
-        "currentTab": 16
+        "currentTab": 17
       }
     ],
     "direction": "vertical"
@@ -378,10 +392,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0b1e2565dfccf0ec",
+  "active": "db679236f16d3042",
   "lastOpenFiles": [
-    "Apostas/2025/novembro/bayern freiburgo e rb leipzig vencem.md",
     "Apostas/2025/novembro/tigres deportivo e  america para vencer.md",
+    "Apostas/2025/novembro/brasileirao menos 3.5 gols hoje.md",
+    "Apostas/2025/novembro/bayern freiburgo e rb leipzig vencem.md",
     "Apostas/2025/novembro/atalanta juventus e napoli vencem.md",
     "00 Dashboards/Resumo Diário.md",
     "Apostas/2025/novembro/psg bayer liverpool e real vencer.md",
@@ -409,7 +424,6 @@
     "00 Dashboards/Graficos.md",
     "2025-10.md",
     "00 Dashboards",
-    "Apostas/2025/outubro/Sim - mais de 3.5 - ambas equipes marcam - total de gols maismenos.md",
     "Apostas/2025/outubro/apostas",
     "Apostas/2025/October",
     "cofrinho/Templates",
