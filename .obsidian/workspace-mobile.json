@@ -202,9 +202,23 @@
               "icon": "lucide-file",
               "title": "psg bayer liverpool e real vencer"
             }
+          },
+          {
+            "id": "838182cc0205fc94",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Apostas/2025/novembro/bayern freiburgo e rb leipzig vencem.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "bayern freiburgo e rb leipzig vencem"
+            }
           }
         ],
-        "currentTab": 13
+        "currentTab": 14
       }
     ],
     "direction": "vertical"
@@ -336,10 +350,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e8cdd09888059fc2",
+  "active": "45bbf850c985d125",
   "lastOpenFiles": [
-    "Apostas/2025/novembro/mais de 2.5 gols em cada jogo brasileirao.md",
     "Apostas/2025/novembro/psg bayer liverpool e real vencer.md",
+    "Apostas/2025/novembro/bayern freiburgo e rb leipzig vencem.md",
+    "Apostas/2025/novembro/mais de 2.5 gols em cada jogo brasileirao.md",
     "Apostas/2025/novembro/city newcastle real barcelona e bayern vencem.md",
     "Apostas/2025/novembro/manchester united fulgam e arsenal vencem.md",
     "00 Dashboards/Resumo Diário.md",
@@ -367,7 +382,6 @@
     "Apostas/2025/outubro/Sim - mais de 3.5 - ambas equipes marcam - total de gols maismenos.md",
     "Apostas/2025/outubro/mahomes 250+ jardas e 2+ td de passe.md",
     "Apostas/2025/outubro/madrid ganhar um dos tempos e 1+ sot.md",
-    "Apostas/2025/outubro/kaio jorge marcar ou assistencia.md",
     "Apostas/2025/outubro/apostas",
     "Apostas/2025/October",
     "cofrinho/Templates",
