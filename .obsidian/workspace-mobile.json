@@ -90,9 +90,65 @@
               "icon": "lucide-file",
               "title": "2025-11"
             }
+          },
+          {
+            "id": "10cc9db7a9aa7323",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Apostas/2025/novembro/tottenhan vs chelsea mais de 11.5 escanteios.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "tottenhan vs chelsea mais de 11.5 escanteios"
+            }
+          },
+          {
+            "id": "c6f84724fdefc384",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Apostas/2025/novembro/cruzeiro vence sem sofrer gols.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "cruzeiro vence sem sofrer gols"
+            }
+          },
+          {
+            "id": "a8d2ed4f16a65c54",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Apostas/2025/novembro/santos x fortaleza mais de 10.5 escanteios.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "santos x fortaleza mais de 10.5 escanteios"
+            }
+          },
+          {
+            "id": "510cb1a34423ab72",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 Dashboards/Relatórios Mensais/2025-11.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-11"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 9
       }
     ],
     "direction": "vertical"
@@ -224,10 +280,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d92ab71414864950",
+  "active": "510cb1a34423ab72",
   "lastOpenFiles": [
+    "Apostas/2025/novembro/mirassol x botafogo mais de 2.5 gols total.md",
+    "Apostas/2025/novembro/santos x fortaleza mais de 10.5 escanteios.md",
+    "Apostas/2025/novembro/cruzeiro vence sem sofrer gols.md",
+    "Apostas/2025/novembro/tottenhan vs chelsea mais de 11.5 escanteios.md",
+    "00 Dashboards/Relatórios Mensais/2025-11.md",
     "00 Dashboards/Resumo Diário.md",
-    "Apostas/2025/outubro/TRIPLA NBA - Los Angeles Lakers, Phoenix Suns e Portland Trail Blazers Para Vencerem seus Jogos.md",
+    "Apostas/2025/novembro/TRIPLA NBA - Los Angeles Lakers, Phoenix Suns e Portland Trail Blazers Para Vencerem seus Jogos.md",
     "Apostas/2025/novembro/Philippe coutinho para tocar na bola.md",
     "apostaMacro2.js",
     "00 Dashboards/Resumo Anual.md",
@@ -236,7 +297,6 @@
     "00 Dashboards/Relatórios Mensais/2025-10.md",
     "Apostas/2025/outubro/Cruzeiro vai golear.md",
     "Apostas/2025/outubro/Add.md",
-    "00 Dashboards/Relatórios Mensais/2025-11.md",
     "Página Inicial.md",
     "README.md.lock",
     "Dashboards/Dashboard Principal.md",
@@ -252,10 +312,6 @@
     "Apostas/2025/outubro/barcelona ganha.md",
     "Apostas/2025/outubro/antony 0,5 mais chutes no gol.md",
     "Apostas/2025/outubro/apostas/mahomes 250+ jardas e 2+ td de passe.md",
-    "Apostas/2025/outubro/apostas/madrid ganhar um dos tempos e 1+ sot.md",
-    "Apostas/2025/outubro/apostas/kaio jorge marcar ou assistencia.md",
-    "Apostas/2025/outubro/apostas/bublik 2-0.md",
-    "Apostas/2025/outubro/apostas/barcelona ganha.md",
     "Apostas/2025/outubro/apostas",
     "Apostas/2025/October",
     "cofrinho/Templates",
